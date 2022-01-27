@@ -1,0 +1,25 @@
+{
+  "name": "documentation",
+  "version": "1.0.0",
+  "description": "ProofMe Documentation",
+  "main": "index.html",
+  "scripts": {
+    "start": "docsify serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Proofme-id/Documentation.git"
+  },
+  "keywords": [
+    "Documentation"
+  ],
+  "author": "Didux.io",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Proofme-id/Documentation/issues"
+  },
+  "homepage": "https://github.com/Proofme-id/Documentation#readme",
+  "dependencies": {
+    "docsify-cli": "^4.4.3"
+  }
+}
