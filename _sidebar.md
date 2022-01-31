@@ -22,10 +22,17 @@
     * [List requests](api_list_request.md)
 
 * Components
-  * [Overview](compontents_overview.md)
-  * [Turn service](compontents_turn.md)
-  * [Signalling service](compontents_signalling.md)
-  * [Api service](compontents_api.md)
-  * [Display service](compontents_display.md)
-  * [Didux node](compontents_node.md)
+  * [Overview](components_overview.md)
+  * [Licence service](components_license.md)
+  * [Stats service](components_stats.md)
+  * [Turn service](components_turn.md)
+  * [Signal service](components_signalling.md)
+  * [ProofMe Api](components_api.md)
+  * [Checkout](components_checkout.md)
+  * [Dashboard](components_checkout.md)
+  * [Didux node](components_node.md)
 
+* Sequence diagrams
+  * [Api registration](seq_api_registration.md)
+  * [Api login](seq_api_login.md)
+  * [User login](seq_user_login.md)

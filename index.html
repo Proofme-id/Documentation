@@ -18,7 +18,25 @@
       auto2top: true,
       coverpage: true,
       loadSidebar: true,
-      search: 'auto'
+      search: 'auto',
+      // You just have to copy it to Your own html File
+      markdown: {
+        renderer: {
+
+          code: function (code, lang) {
+            if (lang === 'drawio') {
+              if (window.drawioConverter) {
+                console.log('drawio')
+                return window.drawioConverter(code)
+              } else {
+                return `<div class='drawio-code'>${code}</div>`
+              }
+            } else {
+              return this.origin.code.apply(this, arguments);
+            }
+          }
+        }
+      },
     }
   </script>
   <!-- Docsify v4 -->
@@ -26,5 +44,7 @@
   <script src="//unpkg.com/websequencediagrams-docsify@2.0.1/dist/docsify-websequencediagrams.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-drawio/viewer.min.js"></script>
+  <script src='https://cdn.jsdelivr.net/npm/docsify-drawio/drawio.js'></script>
 </body>
 </html>
