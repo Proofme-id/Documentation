@@ -19,7 +19,10 @@
       coverpage: true,
       loadSidebar: true,
       search: 'auto',
-      // You just have to copy it to Your own html File
+      timeUpdater: {
+        text: "---\nlast update: {docsify-updated}",
+        formatUpdated: "{DD}/{MM}/{YYYY} {HH}:{mm}",
+      },
       markdown: {
         renderer: {
 
@@ -46,5 +49,6 @@
   <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-drawio/viewer.min.js"></script>
   <script src='https://cdn.jsdelivr.net/npm/docsify-drawio/drawio.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-updated@1/src/time-updater.min.js"></script>
 </body>
 </html>

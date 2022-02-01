@@ -23,16 +23,18 @@
 
 * Components
   * [Overview](components_overview.md)
-  * [Licence service](components_license.md)
-  * [Stats service](components_stats.md)
-  * [Turn service](components_turn.md)
-  * [Signal service](components_signalling.md)
   * [ProofMe Api](components_api.md)
   * [Checkout](components_checkout.md)
   * [Dashboard](components_checkout.md)
+  * [Signal service](components_signalling.md)
+  * [Turn service](components_turn.md)
+  * [Admin](components_admin.md)
+  * [Licence service](components_license.md)
+  * [Stats service](components_stats.md)
   * [Didux node](components_node.md)
 
 * Sequence diagrams
   * [Api registration](seq_api_registration.md)
   * [Api login](seq_api_login.md)
   * [User login](seq_user_login.md)
+  * [Setup P2P connection](seq_p2p_connection.md)

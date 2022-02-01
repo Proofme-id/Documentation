@@ -5,10 +5,9 @@
 The login diagram describes how the api login takes place.
 Components involved:
 
-- ProofMe Api
-- License service
-- License service DB
-- Didux blockchain
+* [ProofMe Api](components_api.md)
+* [Licence service](components_license.md)
+* [Didux node](components_node.md)
 
 ## Diagram
 

@@ -5,12 +5,11 @@
 The registration diagram describes how the API registration takes place.
 Components involved:
 
-- Management Dashboard
-- ProofMe Api
-- ProofMe Api DB
-- License service
-- License service DB
-- Didux blockchain
+* [Dashboard](components_checkout.md)
+* [ProofMe Api](components_api.md)
+* [Licence service](components_license.md)
+* [Stats service](components_stats.md)
+* [Didux node](components_node.md)
 
 ## Diagram
 
