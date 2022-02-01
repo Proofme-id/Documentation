@@ -38,11 +38,11 @@ ProofMe License and statistics handlers to monitor the network and validate lice
 
 | Component | Github  | Test  | Prod  |
 |------     |------   |------ |------ |
-|[ProofMe Api](components_api.md)| https://github.com/Proofme-id/IPSP-proofme-api |https://api-test.proofme.id | https://api.proofme.id |
-|[Checkout](components_checkout.md)| https://github.com/Proofme-id/IPSP-checkout |https://checkout-test.proofme.id | https://checkout.proofme.id |
-|[Dashboard](components_checkout.md) | https://github.com/Proofme-id/IPSP-dashboard |https://dashboard-test.proofme.id | https://dashboard.proofme.id |
-|[Signal service](components_signalling.md)| https://github.com/Proofme-id/IPSP-signal-service |https://signal-test.proofme.id | https://signal.proofme.id |
-|[Turn service](components_turn.md) | https://github.com/Proofme-id/IPSP-turn |https://turn-test.proofme.id | https://turn.proofme.id |
-|[Admin](components_admin.md) | https://github.com/Proofme-id/IPSP-admin |https://admin-test.proofme.id | https://admin.proofme.id |
-|[Licence service](components_license.md) | https://github.com/Proofme-id/IPSP-license-service |https://license-test.proofme.id | https://license.proofme.id |
-|[Stats service](components_stats.md) | https://github.com/Proofme-id/IPSP-stats-service |https://stats-test.proofme.id | https://stats.proofme.id |
+|[ProofMe Api](components_api.md)| https://github.com/Proofme-id/IPSP-Proofme-Api |https://api-test.proofme.id | https://api.proofme.id |
+|[Checkout](components_checkout.md)| https://github.com/Proofme-id/IPSP-Checkout |https://checkout-test.proofme.id | https://checkout.proofme.id |
+|[Dashboard](components_checkout.md) | https://github.com/Proofme-id/IPSP-Dashboard |https://dashboard-test.proofme.id | https://dashboard.proofme.id |
+|[Signal service](components_signalling.md)| https://github.com/Proofme-id/IPSP-Signal-Service |https://signal-test.proofme.id | https://signal.proofme.id |
+|[Turn service](components_turn.md) | https://github.com/Proofme-id/IPSP-Turn |https://turn-test.proofme.id | https://turn.proofme.id |
+|[Admin](components_admin.md) | https://github.com/Proofme-id/IPSP-Admin |https://admin-test.proofme.id | https://admin.proofme.id |
+|[Licence service](components_license.md) | https://github.com/Proofme-id/IPSP-License-Service |https://license-test.proofme.id | https://license.proofme.id |
+|[Stats service](components_stats.md) | https://github.com/Proofme-id/IPSP-Stats-Service |https://stats-test.proofme.id | https://stats.proofme.id |
