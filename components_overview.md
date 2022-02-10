@@ -43,6 +43,7 @@ ProofMe License and statistics handlers to monitor the network and validate lice
 |[Dashboard](components_checkout.md) | https://github.com/Proofme-id/IPSP-Dashboard |https://dashboard-test.proofme.id | https://dashboard.proofme.id |
 |[Signal service](components_signalling.md)| https://github.com/Proofme-id/IPSP-Signal-Service |https://signal-test.proofme.id | https://signal.proofme.id |
 |[Turn service](components_turn.md) | https://github.com/Proofme-id/IPSP-Turn |https://turn-test.proofme.id | https://turn.proofme.id |
-|[Admin](components_admin.md) | https://github.com/Proofme-id/IPSP-Admin |https://admin-test.proofme.id | https://admin.proofme.id |
-|[Licence service](components_license.md) | https://github.com/Proofme-id/IPSP-License-Service |https://license-test.proofme.id | https://license.proofme.id |
-|[Stats service](components_stats.md) | https://github.com/Proofme-id/IPSP-Stats-Service |https://stats-test.proofme.id | https://stats.proofme.id |
+|[Admin dashboard](components_admin.md) | https://github.com/Proofme-id/Admin-dashboard | Electron | Electron |
+|[Licence services](components_license.md) | https://github.com/Proofme-id/License-Services |https://license-test.proofme.id | https://license.proofme.id |
+|[Stats services](components_stats.md) | https://github.com/Proofme-id/Stats-Services |https://stats-test.proofme.id | https://stats.proofme.id |
+|[News services](components_stats.md) | https://github.com/Proofme-id/News-Services |https://news-test.proofme.id | https://news.proofme.id |

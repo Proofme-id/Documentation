@@ -16,45 +16,31 @@ Components involved:
 ```websequencediagrams
 title Setup P2P Connection
 
-actor Admin
+actor Visitor
 participant App
-participant Web App
-participant Api
-participant Api DB
+participant Host
 participant Signaling
 participant TURN
 participant Blockchain
 
-Note over Web App, Api: Open WS connection
-Note over Api: Check CORS Origin header
-Api->Signaling: Connect Websocket
-activate Signaling
-Api->Signaling: Identify Host
-loop keep alive
-Api<->Signaling: Ping Pong
-end
-note over Signaling: Whitelisted?
+note over Host: Sign challenge with keys
+Host->Signaling: WS connect as HOST
+note over Signaling: Whitelisted and valid DID?
 Signaling->Blockchain: Verify Host
-// Check Did + publicKey
 alt Host is not whitelist/incorrect auth
-Signaling->Api:  Send error
-note over Api: Show Error
+Signaling->Host: Send error
+note over Host: Show Error
 end 
-Signaling->Api: channelId + TURN details
-Api->Web App:Connection details
-note over Web App:Show QR
-Admin<->Web App:Scan QR
-Api->TURN: Get iceCandidates
-App->Signaling:Connect to channelId
+Signaling->Host: channelId + TURN details
+note over Host: Show QR
+App<->Host:Scan QR
+Host->TURN: Get iceCandidates
+App->Signaling: Connect to channelId
 Signaling->App:Status + TURN Details
 App->TURN: Get iceCandidates
-Signaling->Api: Client connected
-Api->Web App:Connection status
-note over Web App:Show Connection status
-Signaling<->Api: Share iceCandidates
+Signaling->Host: Client connected
+note over Host: Show Connection status
+Signaling<->Host: Share iceCandidates
 Signaling<->App: Share iceCandidates
-App<->Api: P2P Connection successful!
-Web App<->Api: P2P Connection successful!
-Note over Web App,App: Start request
-
+Note over App,Host: P2P Connection successful!
 ```

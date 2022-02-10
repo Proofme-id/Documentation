@@ -16,33 +16,25 @@ Components involved:
 ```websequencediagrams
 title User login flow
 
-actor Admin
+actor Visitor
 participant App
-participant Dashboard
+participant Website
 participant Api
 participant Api DB
 participant Signaling
 participant TURN
 participant Blockchain
 
-Dashboard->Api: ws connect
-Note over Api: Check CORS Origin header
+note over Website: Unique uuid + browser in state\nBrowser is host
 note over App, Blockchain: Setup p2p connection
-App<->Api: P2P Connection successful!
-activate Api
-Dashboard<->Api: P2P Connection successful!
-Dashboard->Api: WS Login command
-
-Api->App: Send **Signed** login request
-App->Blockchain: Verify Host
-note over App:Show Request
-note over App:Sign Response
-App->Api: Share response
+App<->Website: P2P Connection successful!
+Website->App: WS Login request + Unique uuid & browser in state
+note over App: Validate URL + uuid\nStore url + uuid + browser
+App->Api: POST **Signed** login response
 Api->Blockchain: Verify response & publicKey & DID
 Api->Api DB: Get user details
 note over Api:Generate JWT
-Api->App:Share success True/False
-Api->Dashboard:Share JWT
-note over Dashboard:Continue
-deactivate Api
+Api->App: return JWT
+App->Website: Share JWT
+note over Website: We have a JWT!
 ```
