@@ -13,7 +13,7 @@ A `Client` can connect to a host by scanning the presented QR-code.
  
 
 ```websequencediagrams
-title Identification flow
+title Setup P2P flow
 
 participant Host
 participant Signaling

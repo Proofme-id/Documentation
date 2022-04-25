@@ -17,3 +17,10 @@ See the [Quick start](todo.md) guide for more details.
 ## Examples
 
 Check out the [Demo](https://demo.proofme.id) to see ProofMe in use.
+
+## How to run?
+```
+npm i
+npm run start
+```
+The documentation is now available at http://localhost:3000
