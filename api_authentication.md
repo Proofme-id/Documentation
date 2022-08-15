@@ -2,7 +2,7 @@
 
 ## Getting started
 
-The ProofMe API offers two authentication methods:
+The Proofme API offers two authentication methods:
 
 - Signature keys: Public/Private key combination for extra security
 - API keys: basic API access for a specific service.
@@ -13,7 +13,7 @@ We recommend using Signature keys for the best security.
 
 The first thing you need is a service profile. Each service profile has a Live authentication key and a Test authentication key.
 
-While building and testing your integration, you should use the Test authentication key. Read more about the test mode in our guide about testing the ProofMe API. Once you are ready to start processing real identifications, switch out your test key for the Live authentication key.
+While building and testing your integration, you should use the Test authentication key. Read more about the test mode in our guide about testing the Proofme API. Once you are ready to start processing real identifications, switch out your test key for the Live authentication key.
 
 Of course it’s very important to keep any authentication keys secure. Do not ever share them. However, if a key leaks you can always regenerate it. Do not forget to apply new keys to your code. Until you do your integration will not work.
 

@@ -1,8 +1,8 @@
-![logo](_media/icon.png)
+![logo](_media/logo.svg)
 
-# ProofMe IPSP
+# documentation
 
-> Decentralised Identity and Payment Service Provider
+> Decentralised Identity Service Provider
 
 - Simple and lightweight
 - Decentralised

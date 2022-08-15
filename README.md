@@ -1,12 +1,14 @@
-## ProofMe IPSP
+![logo](_media/logo.svg)
 
-> Decentralised Identity and Payment Service Provider.
+## Proofme documentation
+
+> Decentralised Identity Service Provider.
 
 ## What it is
 
-ProofMe IPSP allows you to process identification in the most secure way.
+Proofme allows you to process identification in the most secure way.
 
-See the [Quick start](todo.md) guide for more details.
+<!-- See the [Quick start](todo.md) guide for more details. -->
 
 ## Features
 
@@ -17,10 +19,3 @@ See the [Quick start](todo.md) guide for more details.
 ## Examples
 
 Check out the [Demo](https://demo.proofme.id) to see ProofMe in use.
-
-## How to run?
-```
-npm i
-npm run start
-```
-The documentation is now available at http://localhost:3000

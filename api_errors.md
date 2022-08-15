@@ -2,18 +2,18 @@
 
 ## HTTP status codes
 
-Whenever you send a request to the ProofMe API you will get a response in JSON (JavaScript Object Notation) format. This is a standard for data communication that’s easy to read for humans as well as machines. Alongside the JSON-response an HTTP status code is sent that shows whether the request was successful or not. If it was not, you can tell by the code and the message in the response what went wrong, why it went wrong and whether there is something you can do about it.
+Whenever you send a request to the Proofme API you will get a response in JSON (JavaScript Object Notation) format. This is a standard for data communication that’s easy to read for humans as well as machines. Alongside the JSON-response an HTTP status code is sent that shows whether the request was successful or not. If it was not, you can tell by the code and the message in the response what went wrong, why it went wrong and whether there is something you can do about it.
 
 ## A successful request
 An HTTP status 200 OK, 201 Created or 204 No Content is issued whenever your request was a success.
 
 ## The response types
 
-The first digit of the status code indicates the type or class of the status. Using this first digit you can determine the best approach for dealing with an error. The following classes of codes are relevant to the ProofMe API:
+The first digit of the status code indicates the type or class of the status. Using this first digit you can determine the best approach for dealing with an error. The following classes of codes are relevant to the Proofme API:
 
-- A code in the 2xx range comes with a ProofMe API response indicating success.
-- A code in the 4xx range is an error code returned from the ProofMe API where the client (your responsibility) seems to be causing the error. Whenever this happens you can change your code to prevent the error from happening again. The error for this specific request usually will not go away by itself.
-- A code in the 5xx range is an error caused by the server (ProofMe's responsibility). So caused by the ProofMe API or it is infrastructure related. In the rare case you get this type of error, something is wrong with the ProofMe API. The errors should subside without your mediation.
+- A code in the 2xx range comes with a Proofme API response indicating success.
+- A code in the 4xx range is an error code returned from the Proofme API where the client (your responsibility) seems to be causing the error. Whenever this happens you can change your code to prevent the error from happening again. The error for this specific request usually will not go away by itself.
+- A code in the 5xx range is an error caused by the server (Proofme's responsibility). So caused by the Proofme API or it is infrastructure related. In the rare case you get this type of error, something is wrong with the Proofme API. The errors should subside without your mediation.
 
 ## Examples of error responses
 
@@ -49,7 +49,7 @@ The HTTP status `401 Unauthorized` indicates missing or incorrect authorization 
 Another error that occurs often, is the well known HTTP status `404 Not Found`, which indicates the object you are trying to retrieve or manipulate does not exist.
 
 ## All possible status codes
-The ProofMe API will only ever return a subset of all legal HTTP status codes. Here’s the full list:
+The Proofme API will only ever return a subset of all legal HTTP status codes. Here’s the full list:
 
 ### 200	OK
 Your request was successful.
@@ -58,7 +58,7 @@ The entity was created successfully.
 ### 204	No Content
 The requested entity was canceled / deleted successfully.
 ### 400	Bad Request
-The ProofMe API was unable to understand your request. There might be an error in your syntax.
+The Proofme API was unable to understand your request. There might be an error in your syntax.
 ### 401	Unauthorized
 Your request was not executed due to failed authentication. Check your API key.
 ### 403	Forbidden

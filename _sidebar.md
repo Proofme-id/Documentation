@@ -1,37 +1,43 @@
-* [test](examples.md)
+
+[![logo](_media/logo.svg)](README.md)
+<!-- * [test](examples.md) -->
+* [Start](README.md)
 * Introduction
   * [Identifications](identifications.md)
   * [Hosted checkout](hosted_checkout.md)
   * [Build your own checkout](byo_checkout.md)
   * [On-premise checkout](onpremise_checkout.md)
 
-* ProofMe Api
+* Proofme Api
   * [Overview](api_overview.md)
   * [Security](api_security.md)
-  * [Authentication](api_authentication.md)
-  * [Testing](api_testing.md)
-  * [Common data types](api_cdt.md)
+  <!-- * [Authentication](api_authentication.md) -->
+  <!-- * [Testing](api_testing.md) -->
+  <!-- * [Common data types](api_cdt.md) -->
   * [Handling errors](api_errors.md)
   * [Webhooks](api_webhooks.md)
-  * [Pagination](api_pagination.md)
-  * Identification
-    * [Create request](api_create_request.md)
-    * [Get request](api_get_request.md)
-    * [Update request](api_update_request.md)
-    * [Cancel request](api_cancel_request.md)
-    * [List requests](api_list_request.md)
+  <!-- * [Pagination](api_pagination.md) -->
+  <!-- * Identification -->
+    <!-- * [Create request](api_create_request.md) -->
+    <!-- * [Get request](api_get_request.md) -->
+    <!-- * [Update request](api_update_request.md) -->
+    <!-- * [Cancel request](api_cancel_request.md) -->
+    <!-- * [List requests](api_list_request.md) -->
 
 * Components
   * [Overview](components_overview.md)
-  * [ProofMe Api](components_api.md)
+  * [Proofme Api](components_api.md)
   * [Checkout](components_checkout.md)
   * [Dashboard](components_dashboard.md)
   * [Signal service](components_signalling.md)
   * [Turn service](components_turn.md)
-  * [Admin](components_admin.md)
-  * [Licence service](components_license.md)
-  * [Stats service](components_stats.md)
-  * [Didux node](components_node.md)
+  <!-- * [Admin](components_admin.md) -->
+  <!-- * [Licence service](components_license.md) -->
+  <!-- * [Stats service](components_stats.md) -->
+  <!-- * [Didux node](components_node.md) -->
+
+* Plugins
+  * [Proofme-webrtc](plug-proofme-webrtc.md)
 
 * Sequence diagrams
   * [Api registration](seq_api_registration.md)
