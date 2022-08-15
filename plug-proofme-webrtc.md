@@ -1,4 +1,4 @@
-# Proofme Webrtc - Nodejs plugin for setting up a secure connection
+# Proofme Webrtc - Plugin for setting up a secure connection
 
 This package allows easy usage of the WebRTC part as of a lot of utilty functions to check credentials and validity of those
 
