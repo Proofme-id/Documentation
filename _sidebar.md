@@ -38,6 +38,8 @@
 
 * Plugins
   * [Proofme-webrtc](plug-proofme-webrtc.md)
+  * [Proofme-webrtc-web](plug-proofme-webrtc-web.md)
+  * [Proofme-webrtc-node](plug-proofme-webrtc-node.md)
 
 * Sequence diagrams
   * [Api registration](seq_api_registration.md)
