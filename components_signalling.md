@@ -1,7 +1,5 @@
 # Signal Service
 
-## Diagrams
-
 ### Connect as host with client
 
 A host or website needs to be a host to allow connections from clients.
@@ -47,3 +45,4 @@ Host->Signaling: Close connection
 Client->Signaling: Close connection
 ```
 
+> More info soon

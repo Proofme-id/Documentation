@@ -1,10 +1,8 @@
 ![logo](_media/logo.svg)
 
-## Proofme documentation
+> This documentation is still WORK IN PROGRESS and receives updates on a weekly basis.
 
-> Decentralised Identity Service Provider.
-
-## What it is
+## What is Proofme?
 
 Proofme allows you to process identification in the most secure way.
 

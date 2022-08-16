@@ -7,9 +7,9 @@ Components involved:
 
 * [Dashboard](components_checkout.md)
 * [ProofMe Api](components_api.md)
-* [Licence service](components_license.md)
-* [Stats service](components_stats.md)
-* [Didux node](components_node.md)
+<!-- * [Licence service](components_license.md) -->
+<!-- * [Stats service](components_stats.md) -->
+<!-- * [Didux node](components_node.md) -->
 
 ## Diagram
 

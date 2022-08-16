@@ -1,14 +1,15 @@
-# ProofMe Api
+# Proofme Api
 
-The ProofMe Api is responsible for a plug-and-play solution and can be installed as SAAS solution or STAND_ALONE
-
-## STAND_ALONE (Default)
-
-In stand-alone mode the ProofMe Api is only available for one organisation.
+The Proofme Api is responsible for a plug-and-play solution and can be installed as SAAS solution or STAND_ALONE
 
 ## SAAS 
 
-In SAAS (Software as a service) mode the ProofMe Api is available for multiple organisations and licenses.
+In SAAS (Software as a service) mode the Proofme Api is available for multiple organisations and licenses.
+
+## STAND_ALONE (Default)
+
+In stand-alone mode the Proofme Api is only available for one organisation.
+
 
 ### Features
 * Registration
@@ -17,3 +18,5 @@ In SAAS (Software as a service) mode the ProofMe Api is available for multiple o
 * admin login
 * manage admins
 * Manage identification requests
+
+> More coming soon

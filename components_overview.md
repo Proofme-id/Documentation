@@ -22,7 +22,7 @@ A complete environment to install on-premise in the customers environment.
 * [Dashboard](components_checkout.md)
 * [Signal service](components_signalling.md)
 * [Turn service](components_turn.md)
-* [Didux node](components_node.md)
+<!-- * [Didux node](components_node.md) -->
 
 <!-- ### ProofMe
 

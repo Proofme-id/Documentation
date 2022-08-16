@@ -1,9 +1,11 @@
 # Identifications
 
+> WIP
+
 With Proofme, accepting Identifications is a breeze.
 We provide a hosted checkout for simple implementations, but also support own-hosted implementations.
 
-Dow you want to build an integration yourself instead? Look at out complete installation flow.
+Do you want to build an integration yourself instead? Look at our complete installation flow.
 
 ## Basic identification flow
 

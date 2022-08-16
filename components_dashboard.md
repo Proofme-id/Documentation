@@ -1,6 +1,6 @@
-# Dashboard
+# Backoffice
 
-The dashboard is frontend for the ProofMe Api.
+The backoffice is a frontend for managing your Proofme organisation.
 
 ### Features
 * First installation
@@ -8,5 +8,5 @@ The dashboard is frontend for the ProofMe Api.
 * Config Identification requests
 * Manage Identification requests
 * Manage License
-* Manage nodes
+* Manage nodes/validators
 * Manage companies (SAAS only)

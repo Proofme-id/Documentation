@@ -5,11 +5,11 @@
 Detailed description of P2P connection setup.
 Components involved:
 
-* [Dashboard](components_checkout.md) as Web App
-* [ProofMe Api](components_api.md)
+* [Dashboard](components_checkout.md) as Host
+<!-- * [ProofMe Api](components_api.md) -->
 * [Signal service](components_signalling.md)
 * [Turn service](components_turn.md)
-* [Didux node](components_node.md)
+<!-- * [Didux node](components_node.md) -->
 
 ## Diagram
 

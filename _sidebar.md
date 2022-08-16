@@ -1,12 +1,12 @@
 
-[![logo](_media/logo.svg)](README.md)
+[![logo](_media/logo.svg)](readme.md)
 <!-- * [test](examples.md) -->
-* [Start](README.md)
+* [Start](readme.md)
 * Introduction
-  * [Identifications](identifications.md)
-  * [Hosted checkout](hosted_checkout.md)
-  * [Build your own checkout](byo_checkout.md)
-  * [On-premise checkout](onpremise_checkout.md)
+  * [Identifications](intro_identifications.md)
+  * [Hosted checkout](intro_hosted_checkout.md)
+  * [Build your own checkout](intro_byo_checkout.md)
+  * [On-premise checkout](intro_onpremise_checkout.md)
 
 * Proofme Api
   * [Overview](api_overview.md)
@@ -28,13 +28,16 @@
   * [Overview](components_overview.md)
   * [Proofme Api](components_api.md)
   * [Checkout](components_checkout.md)
-  * [Dashboard](components_dashboard.md)
+  * [Backoffice](components_dashboard.md)
   * [Signal service](components_signalling.md)
   * [Turn service](components_turn.md)
   <!-- * [Admin](components_admin.md) -->
   <!-- * [Licence service](components_license.md) -->
   <!-- * [Stats service](components_stats.md) -->
   <!-- * [Didux node](components_node.md) -->
+  
+* Digital Identity
+  * [Overview](did_overview.md)
 
 * Plugins
   * [Proofme-webrtc](plug-proofme-webrtc.md)
