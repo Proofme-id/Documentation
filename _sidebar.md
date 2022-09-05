@@ -17,9 +17,9 @@
   * [Handling errors](api_errors.md)
   * [Webhooks](api_webhooks.md)
   <!-- * [Pagination](api_pagination.md) -->
-  <!-- * Identification -->
-    <!-- * [Create request](api_create_request.md) -->
-    <!-- * [Get request](api_get_request.md) -->
+  * [Identification API (V1)](v1_id_api.md)
+    * [Create identification](v1_id_api_create_request.md)
+    * [Get identification](v1_id_api_get_request.md)
     <!-- * [Update request](api_update_request.md) -->
     <!-- * [Cancel request](api_cancel_request.md) -->
     <!-- * [List requests](api_list_request.md) -->
@@ -38,6 +38,8 @@
   
 * Digital Identity
   * [Overview](did_overview.md)
+  * [Identification request](did_request.md)
+  * [Identification response](did_response.md)
 
 * Plugins
   * [Proofme-webrtc](plug-proofme-webrtc.md)

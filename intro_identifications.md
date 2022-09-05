@@ -10,9 +10,9 @@ Do you want to build an integration yourself instead? Look at our complete insta
 ## Basic identification flow
 
 In its simplest form, setting up a **identification** requires only three steps: 
-- setting up the request with our API
-- sending the customer to our hosted checkout
-- processing the webhook we send once the identification is completed.
+  * setting up the request with our API
+  * sending the customer to our hosted checkout
+  * processing the webhook we send once the identification is completed.
 
 You can find an example of the hosted checkout in our demo environment.
 
