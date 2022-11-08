@@ -1,6 +1,6 @@
-# Proofme Checkout
+# My page
 
-The Proofme checkout makes identifications simple.
+The My page makes identifications simple.
 Use our customisable checkout our build your own.
 
 > More coming soon

@@ -5,7 +5,7 @@
 The user login diagram describes how the user login takes place.
 Components involved:
 
-* [Dashboard](components_checkout.md)
+* [Dashboard](components_dashboard.md)
 * [ProofMe Api](components_api.md)
 * [Signal service](components_signalling.md)
 * [Turn service](components_turn.md)

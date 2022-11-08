@@ -5,7 +5,7 @@
 The registration diagram describes how the API registration takes place.
 Components involved:
 
-* [Dashboard](components_checkout.md)
+* [Dashboard](components_dashboard.md)
 * [ProofMe Api](components_api.md)
 <!-- * [Licence service](components_license.md) -->
 <!-- * [Stats service](components_stats.md) -->

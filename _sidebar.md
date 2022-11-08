@@ -27,13 +27,9 @@
 * Components
   * [Overview](components_overview.md)
   * [Proofme Api](components_api.md)
-  * [Checkout](components_checkout.md)
-  * [Backoffice](components_dashboard.md)
-  * [Signal service](components_signalling.md)
+  * [My page](components_mypage.md)
+  * [Dashboard](components_dashboard.md)
   * [Turn service](components_turn.md)
-  <!-- * [Admin](components_admin.md) -->
-  <!-- * [Licence service](components_license.md) -->
-  <!-- * [Stats service](components_stats.md) -->
   <!-- * [Didux node](components_node.md) -->
   
 * Digital Identity
