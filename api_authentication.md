@@ -53,7 +53,7 @@ Content-Type: application/hal+json
         "self": {
             "href": "https://api.proofme.id/v1/request/tr_WDqYK6vllg"
         },
-        "checkout": {
+        "MyPage": {
             "href": "https://secure.proofme.id/WDqYK6vllg"
         }
     }

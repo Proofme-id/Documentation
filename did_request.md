@@ -30,7 +30,7 @@ Each credential contains:
 
 #### description
 _string_  
-Description configured by the backoffice
+Description configured by the Dashboard
 
 #### purpose
 _enum_  
