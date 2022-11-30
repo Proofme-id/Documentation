@@ -15,7 +15,7 @@ ___
 ## Response
 
 `200` application/json  
-A identification object is returned.
+An identification object is returned.
 
 # Request
 
@@ -65,6 +65,7 @@ Content-Type: application/json
             }
         },
         "proofmeId": "pr_12345",
+        "scannedAt": null,
         "createdAt": "2022-01-01T12:00:00+00:00",
         "updatedAt": "2022-01-01T12:00:00+00:00"
     }

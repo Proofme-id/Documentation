@@ -108,6 +108,7 @@ Content-Type: application/json
                     ]
                 }
             },
+            "scannedAt": null,
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
         },
@@ -139,6 +140,7 @@ Content-Type: application/json
                     ]
                 }
             },
+            "scannedAt": null,
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
         }

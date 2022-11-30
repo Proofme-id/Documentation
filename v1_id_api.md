@@ -23,6 +23,11 @@ Retrieve a list of all identification intents.
 
 Retrieve a specific identification intent.
 
+##### [Get identification data](v1_id_api_get_identification_data.md)
+`GET /v1/identification/data/*id*`
+
+Retrieve the data associated with a specific identification intent.
+
 ##### [Revoke identification](v1_id_api_delete_identification.md)
 `DELETE /v1/identification/*id*`
 

@@ -21,6 +21,7 @@
     * [Create identification](v1_id_api_create_identification.md)
     * [Get identification list](v1_id_api_get_identification_list.md)
     * [Get identification](v1_id_api_get_identification.md)
+    * [Get identification data](v1_id_api_get_identification_data.md)
     * [Revoke identification](v1_id_api_delete_identification.md)
 
 * Components
