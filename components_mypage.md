@@ -1,6 +1,6 @@
-# My page
+# MyPage
 
-The My page makes identifications simple.
-Use our customisable checkout our build your own.
+The MyPage makes identifications simple.
+Use our customisable MyPage our build your own.
 
 > More coming soon

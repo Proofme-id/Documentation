@@ -1,4 +1,4 @@
-# On-premise checkout
+# On-premise MyPage
 
 > This is WIP
 

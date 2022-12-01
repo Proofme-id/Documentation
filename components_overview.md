@@ -19,7 +19,7 @@ A complete environment to install on-premise in the customers environment.
 | Component | Github  | Test  | Prod  |
 |------     |------   |------ |------ |
 |[Proofme Api](components_api.md)| https://github.com/Proofme-id/IPSP-Api | https://api-test.proofme.id | https://api.proofme.id |
-|[My page](components_mypage.md)| https://github.com/Proofme-id/IPSP-My-page | https://checkout-test.proofme.id | https://checkout.proofme.id |
+|[My page](components_mypage.md)| https://github.com/Proofme-id/IPSP-My-page | https://mypage-test.proofme.id | https://mypage.proofme.id |
 |[Dashboard](components_dashboard.md) | https://github.com/Proofme-id/IPSP-Dashboard | https://dashboard-test.proofme.id | https://dashboard.proofme.id |
 |[Turn service](components_turn.md) | https://github.com/Proofme-id/IPSP-Turn | https://turn-test.proofme.id | https://turn.proofme.id |
 |Notifications service |  | https://notifications-test.proofme.id | https://notifications.proofme.id |

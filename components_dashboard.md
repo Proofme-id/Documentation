@@ -1,6 +1,6 @@
-# Backoffice
+# Dashboard
 
-The backoffice is a frontend for managing your Proofme organisation.
+The Dashboard is a frontend for managing your Proofme organisation.
 
 ### Features
 * First installation

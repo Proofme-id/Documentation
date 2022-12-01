@@ -4,9 +4,9 @@
 * [Start](readme.md)
 * Introduction
   * [Identifications](intro_identifications.md)
-  * [Hosted checkout](intro_hosted_checkout.md)
-  * [Build your own checkout](intro_byo_checkout.md)
-  * [On-premise checkout](intro_onpremise_checkout.md)
+  * [Hosted MyPage](intro_hosted_mypage.md)
+  * [Build your own MyPage](intro_byo_mypage.md)
+  * [On-premise MyPage](intro_onpremise_mypage.md)
 
 * Proofme Api
   * [Overview](api_overview.md)
@@ -18,11 +18,11 @@
   * [Webhooks](api_webhooks.md)
   <!-- * [Pagination](api_pagination.md) -->
   * [Identification API (V1)](v1_id_api.md)
-    * [Create identification](v1_id_api_create_request.md)
-    * [Get identification](v1_id_api_get_request.md)
-    <!-- * [Update request](api_update_request.md) -->
-    <!-- * [Cancel request](api_cancel_request.md) -->
-    <!-- * [List requests](api_list_request.md) -->
+    * [Create identification](v1_id_api_create_identification.md)
+    * [Get identification list](v1_id_api_get_identification_list.md)
+    * [Get identification](v1_id_api_get_identification.md)
+    * [Get identification data](v1_id_api_get_identification_data.md)
+    * [Revoke identification](v1_id_api_delete_identification.md)
 
 * Components
   * [Overview](components_overview.md)
