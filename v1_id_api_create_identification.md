@@ -32,16 +32,12 @@ ____
 #### redirectUrl
 _string_ `REQUIRED`
 
-!> Not yet implemented
-
 The URL your customer will be redirected to after the identification process.
 It could make sense for the redirectUrl to contain a unique identifier – like your order ID – so you can show the right page referencing the order when your customer returns.
 
 ____
 #### webhookUrl
 _string_ `OPTIONAL`
-
-!> Not yet implemented
 
 Set the webhook URL, where we will send identification status updates to.
 The webhookUrl is optional, but without a webhook you will miss out on important status changes to your identification.
@@ -52,8 +48,6 @@ ____
 #### locale
 _string_ `OPTIONAL`
 
-!> Not yet implemented
-
 Allows you to preset the language to be used in the hosted MyPage pages shown to the consumer. Setting a locale is highly recommended and will greatly improve your conversion rate. When this parameter is omitted, the browser language will be used instead. You can provide any xx_XX format ISO 15897 locale, but our hosted identification pages currently only support the following languages:
 
 Possible values: `en_US` `en_GB` `nl_NL` `nl_BE`
@@ -62,14 +56,10 @@ ____
 #### metadata
 _mixed_ `OPTIONAL`
 
-!> Not yet implemented
-
 Provide any data you like, for example a string or a JSON object. We will save the data alongside the identification. Whenever you fetch the identification with our API, we will also include the metadata.
 ___
 #### testmode
 _boolean_ `OPTIONAL`
-
-!> Not yet implemented
 
 Set this to `true` to make this identification a test identification.  
 Default value `false`
@@ -88,12 +78,12 @@ An identification object is returned, as described in [Get identification](v1_id
 #### **curl**
 
 ```bash
-curl -X POST https://api.proofme.app/v1/identification \
-   -H "Authorization: Bearer test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM" \
-   -d "description=Identification #12345" \
-   -d "proofmeId=pr_12345" \
-   -d "organisationId=org_12345" \
-   -d "redirectUrl=https://your-application.example.org/identification/12345/" \
+curl -X POST https://api.proofme.id/v1/identification \
+   -H "Authorization: proofme_cFC70rNLNpL8y3C24u3eJLvtmFPBd4B0" \
+   -d "description=New description" \
+   -d "proofmeId=03682de3-b51c-451c-b50e-1977a332c9f2" \
+   -d "organisationId=dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8" \
+   -d "redirectUrl=https://your-application.example.org/redirect/" \
    -d "webhookUrl=https://your-application.example.org/webhook/" \
    -d "metadata={\"my-data\": 12345}"
    -d "testmode=true"
@@ -107,20 +97,20 @@ HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
-    "resource": "identification",
-    "id": "id_uniqueIdentificationId12345",
+    "id": "32daaa56-377f-4db9-acd7-fae2e327421e",
     "mode": "test",
-    "proofmeId": "pr_12345",
-    "organisationId": "org_12345",
-    "status": "0",
-    "description": "Identification #12345",
+    "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+    "organisationId": "dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8",
+    "status": "PENDING",
+    "description": "New description",
     "isRequest": true,
     "metadata": {
         "my-data": 12345
     },
-    "redirectUrl": "https://your-application.example.org/identification/12345/",
+    "redirectUrl": "https://your-application.example.org/redirect/",
     "webhookUrl": "https://your-application.example.org/webhook/",
-    "myPageUrl": "https://your-application.proofme.app/id_uniqueIdentificationId1234",
+    "myPageUrl": "https://your-application.proofme.id/32daaa56-377f-4db9-acd7-fae2e327421e",
+    "scannedAt": null,
     "createdAt": "2022-01-01T12:00:00+00:00",
     "updatedAt": "2022-01-01T12:00:00+00:00"
 }

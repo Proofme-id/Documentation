@@ -35,7 +35,6 @@ HTTP/1.1 200 OK
 Content-Type: application/hal+json
 
 {
-    "resource": "identify",
     "id": "tr_WDqYK6vllg",
     "mode": "test",
     "createdAt": "2018-03-12T11:51:35+00:00",

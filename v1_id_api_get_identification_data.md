@@ -11,7 +11,7 @@ _string_ `REQUIRED`
 The ID of the identification you want to get.
 
 ___
-#### orgnisationId
+#### organisationId
 _string_ `REQUIRED`
 
 The ID of the organisation you want to get the identification from.
@@ -31,9 +31,9 @@ An identification object with data is returned.
 #### **curl**
 
 ```bash
-curl -X GET https://api.proofme.app/v1/identification/data/12345 \
-    -H "Authorization: Bearer test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM" \
-    -d "orgnisationId=12345" \
+curl -X GET https://api.proofme.id/v1/identification/data/12345 \
+    -H "Authorization: proofme_cFC70rNLNpL8y3C24u3eJLvtmFPBd4B0" \
+    -d "organisationId=dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8" \
 ```
 
 <!-- tabs:end -->
@@ -45,26 +45,28 @@ Content-Type: application/json
 
 {
     "identification": {
-        "id": "12345",
-        "description": "Identification #12345",
-        "isRequest": true,
-        "status": 0,
-        "organisationId": "organisationId_12345",
-        "proofmeId": "pr_12345",
+        "id": "cb04b19b-e157-46ec-ba8d-1fba17828a5b",
+        "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
+        "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+        "description": "Identification #1",
+        "status": "SUCCESS",
+        "isRequest": false,
+        "redirectUrl": "https://your-application.example.org/redirect/",
+        "webhookUrl": "https://your-application.example.org/webhook/",
+        "myPageUrl": "https://your-application.proofme.id/cb04b19b-e157-46ec-ba8d-1fba17828a5b",
+        "metadata": null,
+        "mode": "live",
+        "scannedAt": null,
+        "createdAt": "2022-01-01T12:00:00+00:00",
+        "updatedAt": "2022-01-01T12:00:00+00:00",
         "proofme": {
-            "id": "pr_12345",
+            "id": "03682de3-b51c-451c-b50e-1977a332c9f2",
             "name": "Proofme",
-            "organisationId": "org_12345",
-            "deletedAt": null,
+            "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
             "requestedCredentials": {
                 "purpose": "ACCESS_CONTROL",
                 "requester": "Proofme",
                 "storage": "NOT_STORED",
-                "proof": {
-                    "holder": "0x0000000000000000000000000000000000000000",
-                    "nonce": 0000000000000,
-                    "type": "ECDSA",
-                },
                 "credentials": [
                     {
                         "key": "FIRST_NAME",
@@ -75,7 +77,7 @@ Content-Type: application/json
             }
         },
         "data": {
-            "data": {
+            "result": {
                 "credentials": {
                     "EMAIL": {
                         "credentials": {
@@ -89,10 +91,10 @@ Content-Type: application/json
                                     "id": "did:didux:0x0000000000000000000000000000000000000000",
                                     "issuanceDate": "2020-01-01T00:00:00.000Z",
                                     "issuer": {
-                                        "authorityId": "Proofme.ID",
-                                        "authorityName": "Proofme.ID",
+                                        "authorityId": "Proofme",
+                                        "authorityName": "Proofme",
                                         "id": "did:didux:0x0000000000000000000000000000000000000000",
-                                        "name": "Proofme.ID"
+                                        "name": "Proofme"
                                     },
                                     "proof": {
                                         "holder": "0x0000000000000000000000000000000000000000",
@@ -113,9 +115,9 @@ Content-Type: application/json
                     }
                 }
             },
-            "id": "d_12345",
-            "identificationId": "12345",
-            "STORAGE": "CERTIFICATE",
+            "id": "d473af18-0394-44a9-83a5-7b5bdb746c4d",
+            "identificationId": "cb04b19b-e157-46ec-ba8d-1fba17828a5b",
+            "storage": "NOT_STORED",
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
         },

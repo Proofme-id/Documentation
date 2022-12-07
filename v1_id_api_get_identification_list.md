@@ -60,9 +60,9 @@ A list of identification objects is returned.
 #### **curl**
 
 ```bash
-curl -X GET https://api.proofme.app/v1/identification \
-    -H "Authorization: Bearer test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM" \
-    -d "organisationId=org_12345" \
+curl -X GET https://api.proofme.id/v1/identification \
+    -H "Authorization: proofme_cFC70rNLNpL8y3C24u3eJLvtmFPBd4B0" \
+    -d "organisationId=dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8" \
     -d "sortColumn=id" \
     -d "sortDirection=ASC" \
     -d "offset=0" \
@@ -81,69 +81,37 @@ Content-Type: application/json
     "count": 2,
     "rows": [
         {
-            "id": "id_uniqueIdentificationId12345",
-            "description": "Identification #12345",
-            "isRequest": true,
-            "status": 0,
-            "proofme": {
-                "id": "pr_12345",
-                "name": "Proofme",
-                "organisationId": "org_12345",
-                "deletedAt": null,
-                "requestedCredentials": {
-                    "purpose": "ACCESS_CONTROL",
-                    "requester": "Proofme",
-                    "storage": "NOT_STORED",
-                    "proof": {
-                        "holder": "0x0000000000000000000000000000000000000000",
-                        "nonce": 0000000000000,
-                        "type": "ECDSA",
-                    },
-                    "credentials": [
-                        {
-                            "key": "FIRST_NAME",
-                            "provider": "EPASS",
-                            "required": true,    
-                        }
-                    ]
-                }
-            },
+            "id": "32daaa56-377f-4db9-acd7-fae2e327421e",
+            "organisationId": "dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8",
+            "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+            "description": "Identification #2",
+            "status": "PENDING",
+            "isRequest": false,
+            "redirectUrl": "https://your-application.example.org/redirect/",
+            "webhookUrl": "https://your-application.example.org/webhook/",
+            "myPageUrl": "https://your-application.proofme.id/32daaa56-377f-4db9-acd7-fae2e327421e",
+            "metadata": null,
+            "mode": "live",
             "scannedAt": null,
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
         },
         {
-            "id": "id_uniqueIdentificationId12346",
-            "description": "Identification #12346",
+            "id": "cb04b19b-e157-46ec-ba8d-1fba17828a5b",
+            "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
+            "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+            "description": "Identification #1",
+            "status": "SUCCESS",
             "isRequest": false,
-            "status": 0,
-            "proofme": {
-                "id": "pr_12345",
-                "name": "Proofme",
-                "organisationId": "org_12345",
-                "deletedAt": null,
-                "requestedCredentials": {
-                    "purpose": "ACCESS_CONTROL",
-                    "requester": "Proofme",
-                    "storage": "DATABASE",
-                    "proof": {
-                        "holder": "0x0000000000000000000000000000000000000000",
-                        "nonce": 0000000000000,
-                        "type": "ECDSA",
-                    },
-                    "credentials": [
-                        {
-                            "key": "EMAIL",
-                            "provider": "EMAIL",
-                            "required": false,    
-                        }
-                    ]
-                }
-            },
+            "redirectUrl": "https://your-application.example.org/redirect/",
+            "webhookUrl": "https://your-application.example.org/webhook/",
+            "myPageUrl": "https://your-application.proofme.id/cb04b19b-e157-46ec-ba8d-1fba17828a5b",
+            "metadata": null,
+            "mode": "live",
             "scannedAt": null,
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
-        }
+        },
     ]
 }
 
