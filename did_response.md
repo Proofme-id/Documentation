@@ -13,10 +13,10 @@
 				"id": "did:didux:0x8202f3fA8192565EFE966143957Fd877bA237105",
 				"issuanceDate": "2022-07-04T18:49:55.236603+00:00",
 				"issuer": {
-					"authorityId": "Proofme.ID",
-					"authorityName": "Proofme.ID",
+					"authorityId": "Proofme",
+					"authorityName": "Proofme",
 					"id": "did:didux:0x91a935E503eFAEDF22A4a7941BFAcE25DedE0bf3",
-					"name": "Proofme.ID"
+					"name": "Proofme"
 				},
 				"proof": {
 					"holder": "0xA003FAC350C6fd3a8130E83C85e88E6b978726C0",

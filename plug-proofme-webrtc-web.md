@@ -1,4 +1,4 @@
-## Proofme.ID - WebRTC
+## Proofme - WebRTC
 
 This package allows easy usage of the WebRTC part as of a lot of utilty functions to check credentials and validity of those
 

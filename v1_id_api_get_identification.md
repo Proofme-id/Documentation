@@ -24,7 +24,7 @@ An identification object is returned.
 #### **curl**
 
 ```bash
-curl -X GET https://api.proofme.app/v1/identification/12345 \
+curl -X GET https://api.proofme.id/v1/identification/cb04b19b-e157-46ec-ba8d-1fba17828a5b \
 ```
 
 <!-- tabs:end -->
@@ -36,25 +36,28 @@ Content-Type: application/json
 
 {
     "identification": {
-        "id": "12345",
-        "description": "Identification #12345",
-        "isRequest": true,
-        "status": 0,
-        "organisationId": "organisationId_12345",
+        "id": "cb04b19b-e157-46ec-ba8d-1fba17828a5b",
+        "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
+        "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+        "description": "Identification #1",
+        "status": "SUCCESS",
+        "isRequest": false,
+        "redirectUrl": "https://your-application.example.org/redirect/",
+        "webhookUrl": "https://your-application.example.org/webhook/",
+        "myPageUrl": "https://your-application.proofme.id/cb04b19b-e157-46ec-ba8d-1fba17828a5b",
+        "metadata": null,
+        "mode": "live",
+        "scannedAt": null,
+        "createdAt": "2022-01-01T12:00:00+00:00",
+        "updatedAt": "2022-01-01T12:00:00+00:00",
         "proofme": {
-            "id": "pr_12345",
+            "id": "03682de3-b51c-451c-b50e-1977a332c9f2",
             "name": "Proofme",
-            "organisationId": "org_12345",
-            "deletedAt": null,
+            "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
             "requestedCredentials": {
                 "purpose": "ACCESS_CONTROL",
                 "requester": "Proofme",
                 "storage": "NOT_STORED",
-                "proof": {
-                    "holder": "0x0000000000000000000000000000000000000000",
-                    "nonce": 0000000000000,
-                    "type": "ECDSA",
-                },
                 "credentials": [
                     {
                         "key": "FIRST_NAME",
@@ -63,11 +66,7 @@ Content-Type: application/json
                     }
                 ]
             }
-        },
-        "proofmeId": "pr_12345",
-        "scannedAt": null,
-        "createdAt": "2022-01-01T12:00:00+00:00",
-        "updatedAt": "2022-01-01T12:00:00+00:00"
+        }
     }
 }
 
