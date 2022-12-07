@@ -43,7 +43,7 @@ jobs:
         with:
           name: "version.json"
           json: ${{ env.VERSIONING }}
-          dir: '_media/version.json'
+          dir: '_media'
       - uses: kciter/aws-ecr-action@v4
         with:
           access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
