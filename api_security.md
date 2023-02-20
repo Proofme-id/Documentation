@@ -16,10 +16,15 @@ HTTPS mitigates packet sniffing and timing & replay attacks. Thanks to HTTPS, da
 Man-in-the-middle attacks are prevented by strictly checking the HTTPS-certificate used on https://api.proofme.id/. If the client detects a fake certificate – let’s say because of a hacked DNS-server – no connection will be set up.
 
 ## Sensitive information
-All sensitive payment information is entered on our platform. So there is no need to jump trough hoops to make your website PCI DSS certified. We have got you covered.
+All sensitive identification information is entered on our platform. So there is no need to jump trough hoops to make your website certified. We have got you covered.
 
 ## What about the webhooks?
 The webhooks are secured by HTTPS too, even if your hosting service is not using HTTPS. This is because the webhook requests – which Proofme sends out to communicate status changes – simply do not contain sensitive information. Your webhook script will always have to fetch the object in order to know its status, and this can only be done using an HTTPS-secured connection. Here too, the fact https://api.proofme.id/ can only be reached using HTTPS forces your services that do not use HTTPS into security.
+
+## What about the data
+All personal identifiable information (PII), sensitive and nonsensitive are encrypted after validation by the customers public PGP keys.
+After validation, the data can NOT be viewed by Proofme or the platform, and only decrypted by the customers themself.
+Data is encrypted with Elliptic Curve Cryptography with the Curve25519 elliptic curve, offering 128-bits of security (256-bit key size).
 
 ## What’s left?
 An API that’s so convenient you’ll integrate it just for kicks. Make sure you enjoy yourself because you’ll be done in no time.
