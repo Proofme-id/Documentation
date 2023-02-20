@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/Proofme-id/Documentation#readme",
   "dependencies": {
-    "docsify-cli": "^4.4.3"
+    "docsify-cli": "4.4.4"
   }
 }
