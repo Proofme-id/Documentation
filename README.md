@@ -16,4 +16,4 @@ Proofme allows you to process identification in the most secure way.
 
 ## Examples
 
-Check out the [Demo](https://demo.proofme.id) to see ProofMe in use.
+Check out the [Demo](https://demo.proofme.id) to see Proofme in use.

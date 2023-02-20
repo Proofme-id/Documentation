@@ -1,7 +1,7 @@
 
-[![logo](_media/logo.svg)](readme.md)
+> [![logo](_media/logo.svg)](/#)
 <!-- * [test](examples.md) -->
-* [Start](readme.md)
+* [Start](/#)
 * Introduction
   * [Identifications](intro_identifications.md)
   * [Hosted MyPage](intro_hosted_mypage.md)
