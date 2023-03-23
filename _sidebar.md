@@ -21,8 +21,14 @@
     * [Create identification](v1_id_api_create_identification.md)
     * [Get identification list](v1_id_api_get_identification_list.md)
     * [Get identification](v1_id_api_get_identification.md)
-    * [Get identification data](v1_id_api_get_identification_data.md)
-    * [Revoke identification](v1_id_api_delete_identification.md)
+    * [Get (encrypted) identification data](v1_id_api_get_identification_data.md)
+    * [Delete identification data](v1_id_api_delete_identification_data.md)
+    * [Revoke identification](v1_id_api_revoke_identification.md)
+
+* Identification data encryption
+  * [Overview](identification_data_encryption_overview.md)  
+  * [Example Decrypt identification data Node](decrypt_identification_data_node.md)
+  * [Example Decrypt identification data Angular](decrypt_identification_data_angular.md)
 
 * Components
   * [Overview](components_overview.md)
@@ -30,12 +36,17 @@
   * [My page](components_mypage.md)
   * [Dashboard](components_dashboard.md)
   * [Turn service](components_turn.md)
+  * [Notifications service](components_notifications.md)
+  * [License service](components_license.md)
+  * [Stats service](components_stats.md)
+  * [News service](components_news.md)
   <!-- * [Didux node](components_node.md) -->
   
 * Digital Identity
   * [Overview](did_overview.md)
   * [Identification request](did_request.md)
-  * [Identification response](did_response.md)
+  * [Encrypted identification](encrypted_id.md)
+  * [Decrypted identification](decrypted_id.md)
 
 * Plugins
   * [Proofme-webrtc](plug-proofme-webrtc.md)

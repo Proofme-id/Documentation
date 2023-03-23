@@ -1,5 +1,5 @@
 # Get identification
-`GET /v1/identification/*id*`
+`GET /v1/identification/:id`
 
 Gets a single identification by its ID.
 
@@ -39,7 +39,9 @@ Content-Type: application/json
         "id": "cb04b19b-e157-46ec-ba8d-1fba17828a5b",
         "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
         "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+        "proofmeRevision": 1,
         "description": "Identification #1",
+        "scannedAt": null,
         "status": "SUCCESS",
         "isRequest": false,
         "redirectUrl": "https://your-application.example.org/redirect/",
@@ -47,7 +49,7 @@ Content-Type: application/json
         "myPageUrl": "https://your-application.proofme.id/cb04b19b-e157-46ec-ba8d-1fba17828a5b",
         "metadata": null,
         "mode": "live",
-        "scannedAt": null,
+        "notify": null,
         "createdAt": "2022-01-01T12:00:00+00:00",
         "updatedAt": "2022-01-01T12:00:00+00:00",
         "proofme": {
@@ -55,17 +57,34 @@ Content-Type: application/json
             "name": "Proofme",
             "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
             "requestedCredentials": {
-                "purpose": "ACCESS_CONTROL",
-                "requester": "Proofme",
-                "storage": "NOT_STORED",
                 "credentials": [
                     {
-                        "key": "FIRST_NAME",
                         "provider": "EPASS",
-                        "required": true,    
+                        "key": "OLDER_THAN_18",
+                        "required": true
+                    },
+                    {
+                        "provider": "EPASS",
+                        "key": "PHOTO",
+                        "required": true
                     }
-                ]
-            }
+                ],
+                "proof": {
+                    "holder": "0x3Eca4AF267bC035Dd0DAdEBe3E7263a6168478c5",
+                    "nonce": 1679565405432,
+                    "type": "ECDSA"
+                },
+                "purpose": "AGE_VERIFICATION",
+                "requester": "Proofme",
+                "storage": "DATABASE"
+            },
+            "shareOptions": [
+                "NONE"
+            ],
+            "emails": [],
+            "webhookUrl": null,
+            "revision": 1,
+            "deletedAt": null
         }
     }
 }
