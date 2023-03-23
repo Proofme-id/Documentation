@@ -56,7 +56,6 @@ A list of identification objects is returned.
 ```bash
 curl -X GET https://api.proofme.id/v1/identification \
     -H "Authorization: proofme_cFC70rNLNpL8y3C24u3eJLvtmFPBd4B0" \
-    -d "organisationId=dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8" \
     -d "sortColumn=id" \
     -d "sortDirection=ASC" \
     -d "offset=0" \
