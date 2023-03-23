@@ -25,10 +25,10 @@
     * [Delete identification data](v1_id_api_delete_identification_data.md)
     * [Revoke identification](v1_id_api_revoke_identification.md)
 
-* Identification data encryption
+* Identification data encryption / decryption
   * [Overview](identification_data_encryption_overview.md)  
-  * [Example Decrypt identification data Node](decrypt_identification_data_node.md)
-  * [Example Decrypt identification data Angular](decrypt_identification_data_angular.md)
+  * [Encrypt / decrypt examples Node](encryption_examples_node.md)
+  * [Encrypt / decrypt examples Angular](encryption_examples_angular.md)
 
 * Components
   * [Overview](components_overview.md)
