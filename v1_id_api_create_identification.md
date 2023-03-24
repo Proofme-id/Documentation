@@ -61,11 +61,8 @@ Define a hashed key to send a notification to that user. Hashed key may be any o
 
 Example:
 ```
-{
-    "proofmeId": "49148c2c-d0a4-47f8-b4d0-47cb334025f2",
-    "notify": {
-        "hashedPhonenumber": "4c0fe29edc91206df827fb98262f09429ddc0e650ae498f2f06bec1b36563dc1"
-    }
+"notify": {
+    "hashedPhonenumber": "4c0fe29edc91206df827fb98262f09429ddc0e650ae498f2f06bec1b36563dc1"
 }
 ```
 
