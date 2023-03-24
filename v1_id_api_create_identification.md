@@ -15,12 +15,6 @@ _string_ `REQUIRED`
 The ID of the Proofme you have created before.
 
 ___
-#### organisationId
-_string_ `REQUIRED`
-
-The organisation ID in which you want to create the identification.
-
-___
 #### description
 _string_ `OPTIONAL`
 
@@ -30,7 +24,7 @@ The maximum length of the description field is 255 characters. The API will not 
 
 ____
 #### redirectUrl
-_string_ `REQUIRED`
+_string_ `OPTIONAL`
 
 The URL your customer will be redirected to after the identification process.
 It could make sense for the redirectUrl to contain a unique identifier – like your order ID – so you can show the right page referencing the order when your customer returns.
@@ -45,14 +39,6 @@ The webhookUrl is optional, but without a webhook you will miss out on important
 The webhookUrl must be reachable from Proofme's point of view, so you cannot use localhost. If you want to use webhook during development on localhost, you must use a tool like ngrok to have the webhooks delivered to your local machine.
 
 ____
-#### locale
-_string_ `OPTIONAL`
-
-Allows you to preset the language to be used in the hosted MyPage pages shown to the consumer. Setting a locale is highly recommended and will greatly improve your conversion rate. When this parameter is omitted, the browser language will be used instead. You can provide any xx_XX format ISO 15897 locale, but our hosted identification pages currently only support the following languages:
-
-Possible values: `en_US` `en_GB` `nl_NL` `nl_BE`
-
-____
 #### metadata
 _mixed_ `OPTIONAL`
 
@@ -63,6 +49,23 @@ _boolean_ `OPTIONAL`
 
 Set this to `true` to make this identification a test identification.  
 Default value `false`
+___
+#### notify
+_object_ `OPTIONAL`
+
+Define a hashed key to send a notification to that user. Hashed key may be any of the following or combined:
+* hashedPhonenumber
+* hashedEmail
+* hashedDid
+* hashedPublicKey
+
+Example:
+```
+"notify": {
+    "hashedPhonenumber": "4c0fe29edc91206df827fb98262f09429ddc0e650ae498f2f06bec1b36563dc1"
+}
+```
+
 ___
 
 
@@ -82,10 +85,9 @@ curl -X POST https://api.proofme.id/v1/identification \
    -H "Authorization: proofme_cFC70rNLNpL8y3C24u3eJLvtmFPBd4B0" \
    -d "description=New description" \
    -d "proofmeId=03682de3-b51c-451c-b50e-1977a332c9f2" \
-   -d "organisationId=dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8" \
    -d "redirectUrl=https://your-application.example.org/redirect/" \
    -d "webhookUrl=https://your-application.example.org/webhook/" \
-   -d "metadata={\"my-data\": 12345}"
+   -d "metadata={\"my-data\": 12345}" \
    -d "testmode=true"
 ```
 
@@ -97,22 +99,26 @@ HTTP/1.1 201 Created
 Content-Type: application/json
 
 {
-    "id": "32daaa56-377f-4db9-acd7-fae2e327421e",
-    "mode": "test",
-    "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
-    "organisationId": "dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8",
-    "status": "PENDING",
-    "description": "New description",
-    "isRequest": true,
-    "metadata": {
-        "my-data": 12345
-    },
-    "redirectUrl": "https://your-application.example.org/redirect/",
-    "webhookUrl": "https://your-application.example.org/webhook/",
-    "myPageUrl": "https://your-application.proofme.id/32daaa56-377f-4db9-acd7-fae2e327421e",
-    "scannedAt": null,
-    "createdAt": "2022-01-01T12:00:00+00:00",
-    "updatedAt": "2022-01-01T12:00:00+00:00"
+    "identification": {
+        "organisationId": "dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8",
+        "id": "32daaa56-377f-4db9-acd7-fae2e327421e",
+        "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+        "proofmeRevision": 1,
+        "description": "New description",
+        "isRequest": true,
+        "status": "PENDING",
+        "redirectUrl": "https://your-application.example.org/redirect/",
+        "webhookUrl": "https://your-application.example.org/webhook/",
+        "metadata": {
+            "my-data": 12345
+        },
+        "mode": "test",
+        "notify": null,
+        "myPageUrl": "https://your-application.proofme.id/32daaa56-377f-4db9-acd7-fae2e327421e",
+        "updatedAt": "2022-01-01T12:00:00+00:00",
+        "createdAt": "2022-01-01T12:00:00+00:00",
+        "scannedAt": null
+    }
 }
 
 ```

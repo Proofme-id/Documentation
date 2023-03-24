@@ -1,15 +1,9 @@
 # Get identification list
 `GET /v1/identification`
 
-Get all created and public identifications done through the MyPage of your organisation.
+Get all created and public identifications done of your organisation.
 
 ## Parameters
-___
-#### organisationId
-_string_ `REQUIRED`
-
-The ID of the organisation you want to get the identifications from.
-
 ___
 #### sortColumn
 _string_ `OPTIONAL`
@@ -62,7 +56,6 @@ A list of identification objects is returned.
 ```bash
 curl -X GET https://api.proofme.id/v1/identification \
     -H "Authorization: proofme_cFC70rNLNpL8y3C24u3eJLvtmFPBd4B0" \
-    -d "organisationId=dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8" \
     -d "sortColumn=id" \
     -d "sortDirection=ASC" \
     -d "offset=0" \
@@ -84,7 +77,9 @@ Content-Type: application/json
             "id": "32daaa56-377f-4db9-acd7-fae2e327421e",
             "organisationId": "dc1d8dc2-a5b9-4c9d-b855-7024d1d93ca8",
             "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+            "proofmeRevision": 1,
             "description": "Identification #2",
+            "scannedAt": null,
             "status": "PENDING",
             "isRequest": false,
             "redirectUrl": "https://your-application.example.org/redirect/",
@@ -92,7 +87,7 @@ Content-Type: application/json
             "myPageUrl": "https://your-application.proofme.id/32daaa56-377f-4db9-acd7-fae2e327421e",
             "metadata": null,
             "mode": "live",
-            "scannedAt": null,
+            "notify": null,
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
         },
@@ -100,7 +95,9 @@ Content-Type: application/json
             "id": "cb04b19b-e157-46ec-ba8d-1fba17828a5b",
             "organisationId": "39ae2443-936b-4fc3-a0cd-bc04f2563535",
             "proofmeId": "03682de3-b51c-451c-b50e-1977a332c9f2",
+            "proofmeRevision": 1,
             "description": "Identification #1",
+            "scannedAt": null,
             "status": "SUCCESS",
             "isRequest": false,
             "redirectUrl": "https://your-application.example.org/redirect/",
@@ -108,10 +105,10 @@ Content-Type: application/json
             "myPageUrl": "https://your-application.proofme.id/cb04b19b-e157-46ec-ba8d-1fba17828a5b",
             "metadata": null,
             "mode": "live",
-            "scannedAt": null,
+            "notify": null,
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
-        },
+        }
     ]
 }
 

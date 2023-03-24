@@ -73,8 +73,8 @@ There are several actions available (login, identify are the most commonly used)
 ```
 const timestamp = new Date();
 const requestedData: IRequestedCredentials = {
-    by: "Proofme",
-    description: "full identification",
+    requester: "Proofme",
+    description: "Full identification",
     credentials: [
         { key: "PHOTO", provider: "EPASS", required: true },
         { key: "FIRST_NAME", provider: "EPASS", required: true },
@@ -95,10 +95,10 @@ this.webRtcProvider.sendData("identify", {
 
 This will send a request to the Proofme App to share certain credentials
 
-- Key 'by': This is what the user sees to identify to
+- Key 'requester': This is what the user sees who sent the identification request
 - Key 'description': This is what the user sees as subtitle
 - Key 'credentials': This is a list of requested credentials to identify with
-- Subkey 'key': The credential key to request
+- Subkey 'key': The attribute key to request
 - Subkey 'provider': The provider of the requested credential (EPASS, EMAIL, PHONE_NUMBER)
 - Subkey 'required': Pass true for required and false for optional (the user may skip optional credentials)
 
