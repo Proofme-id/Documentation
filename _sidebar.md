@@ -8,6 +8,14 @@
   * [Build your own MyPage](intro_byo_mypage.md)
   * [On-premise MyPage](intro_onpremise_mypage.md)
 
+* Proofme SDK
+  * [Overview](sdk_overview.md)
+  * [Reader](sdk_reader.md)
+    * [Android installation](sdk_reader_installation_android.md)
+    * [iOS installation](sdk_reader_installation_ios.md)
+    * [Example usage](sdk_reader_example_usage.md)
+  * [Qr](sdk_qr.md)
+
 * Proofme Api
   * [Overview](api_overview.md)
   * [Security](api_security.md)
