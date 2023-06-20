@@ -68,3 +68,10 @@ android {
     }
 }
 ```
+
+### Step 7
+Add this to your `settings.gradle` so the project library can be found
+```javascript
+include ':sdk'
+project(':sdk').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/sdk')
+```
