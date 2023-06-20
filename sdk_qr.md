@@ -1,0 +1,2 @@
+# Proofme QR
+This module allows us to share data offline between two devices. One device will switch between QR codes really quickly. The other device will use the camera to scan each QR codes to retrieve the data.
