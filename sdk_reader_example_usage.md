@@ -8,7 +8,6 @@ Example of initialising the SDK:
 ```javascript
 async initializeSdk(): Promise<void> {
     try {
-        // TEST JWT
         const jwt = "FILL_IN_JWT_HERE";
         await EpassReader.initialize({ jwt });
     } catch (error) {
