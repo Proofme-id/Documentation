@@ -60,7 +60,11 @@ Make sure to add the jcenter() repository to `build.gradle  (Module :app)`  for 
 android {
     ...
     dataBinding {
-      enabled = true
+        enabled = true
+    }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
     }
 }
 ```
