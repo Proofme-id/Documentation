@@ -1,7 +1,16 @@
 # Installation iOS
 
 ### Step 1
-Install the dependency through NPM: `npm install @proofme-id/sdk`
+Before installing the SDK, you need to have access to the [Proofme SDK NPM registry](https://github.com/orgs/Proofme-id/packages/npm/package/sdk) and [create a github Personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic)  
+Add the following to ~/.npmrc to be able to download the package (use command `npm config edit` or your favorite text editor):
+```
+//npm.pkg.github.com/:_authToken=<YOUR PERSONAL ACCESS TOKEN>
+@proofme-id:registry=https://npm.pkg.github.com
+```
+Then install the sdk in your project:
+```
+npm install @proofme-id/sdk
+```
 
 ### Step 2
 Sync the project with the plugin: `npx cap sync`
