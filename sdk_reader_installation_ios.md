@@ -21,9 +21,24 @@ end
 ```
 
 ### Step 4
-Actually install the pods `pod install`
+Add the following to your Podfile so that all files can be found
+```javascript
+...
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+  end
+end
+...
+```
 
 ### Step 5
+Actually install the pods `pod install`
+
+### Step 6
 Add the following usage descriptions to your Info.plist file
 
 ```xml
@@ -33,7 +48,7 @@ Add the following usage descriptions to your Info.plist file
 <string>To scan your passport information</string>
 ```
 
-### Step 6
+### Step 7
 Add the following ISO7816 identifiers (type of NFC tags we want to scan) to the Info.plist file
 ```xml
 <key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
@@ -43,10 +58,10 @@ Add the following ISO7816 identifiers (type of NFC tags we want to scan) to the 
 </array>
 ```
 
-### Step 7
+### Step 8
 Add the `Near Field Communication Tag Reading` capability to your project for reading NFC. Do this by going to `Signing & Capabilities` under the `App` tab. Then click on `+ Capability`
 
-### Step 8
+### Step 9
 Add a localization file to your project so we can add translations for the NFC overlay. Do this by going to `File` -> `New` -> `File...` -> `Strings File` -> Save as `Localizable` -> `Create`.
 
 Now double click on the file, on the right the `File inspector` opens. Click on `Localize...`. Now you can select the languages you want to configure. Use the keys below to add translations for your likings. All translation keys used are listed below
