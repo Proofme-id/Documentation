@@ -75,6 +75,17 @@ Ofcourse the NFC reading takes some time depending on the speed of the device as
 
 
 ```javascript
+import { EpassReader, JP2Decoder } from "@proofme-id/sdk/web/reader";
+import { EDataGroup } from "@proofme-id/sdk/web/reader/enums";
+import { ReaderHelper } from "@proofme-id/sdk/web/reader/helpers";
+import {
+    IMrzCredentials,
+    INfcResult,
+    IPassportNfcProgressErrorEvent,
+    IPassportNfcProgressEvent,
+    IScanOptions
+} from "@proofme-id/sdk/web/reader/interfaces";
+
 export class AppComponent {
     iosMrzInvalidReference = this.iosMrzInvalidError.bind(this);
     onPassportReadStartReference = this.onPassportReadStart.bind(this);
@@ -150,6 +161,8 @@ So whenever we are done reading the NFC we receive the datagroups in a number li
 
 #### DG1
 ```javascript
+import { ReaderHelper } from "@proofme-id/sdk/web/reader/helpers";
+
 const dg1Data = this.readerHelper.extractMRZFromDG1(new Uint8Array(this.datagroups.DG1));
 ```
 
@@ -158,7 +171,23 @@ This will result in an object containing each field and step. To use the basic i
 
 #### DG2
 ```javascript
+import { ReaderHelper } from "@proofme-id/sdk/web/reader/helpers";
+
 const dg2Data = this.readerHelper.extractImageFromDG2(new Uint8Array(this.datagroups.DG2));
 ```
 
-This will result in a base64 of type JP2000. Beware that this type is only usable in Safari and no other browser as of now. To convert this to a JPEG or PNG you will probably have to use some sort of a server-side implementation to use this on Chrome, Firefox etc.
+This will result in a base64 of type JP2. Beware that this type is only usable in Safari and no other browser as of now. To convert this to a JPEG use the function below
+
+
+#### JP2 to JPEG
+
+```javascript
+import { JP2Decoder } from "@proofme-id/sdk/web/reader";
+
+try {
+    const imageObject = await JP2Decoder.convertJP2toJPEG({ image: dg2Data });
+    const jpegImage = imageObject.image;
+} catch (error) {
+    console.error(error);
+}
+```
