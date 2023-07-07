@@ -13,9 +13,15 @@ npm install @proofme-id/sdk
 ```
 
 ### Step 2
-Sync the project with the plugin: `npx cap sync`
+The plugin uses Capacitor 5 which requires the use of Java 17. To setup Android Studio to use Java 17:
+- Android Studio -> Preferences
+- Build, Execution, Deployment -> Build Tools -> Gradle
+- Gradle JDK -> Select any JDK 17
 
 ### Step 3
+Sync the project with the plugin: `npx cap sync`
+
+### Step 4
 Make sure to add the jcenter() repository to `build.gradle  (Project: android)`  for retrieving all necessary dependencies
 
 ```gradle
@@ -28,7 +34,7 @@ allprojects {
 }
 ```
 
-### Step 4
+### Step 5
 Inside the `variables.gradle` make sure to have the `minSdkVersion` to a minimum of `28`
 
 ```json
@@ -50,7 +56,7 @@ ext {
 }
 ```
 
-### Step 5
+### Step 6
 Add the following activity next to your existing `MainActivity`. This is the overlay scanner for the MRZ enabling the camera and showing a template of a document card. OCR will be used to extract the necessary information
 ```xml
 <!-- Activity: Camera for MRZ -->
@@ -62,12 +68,35 @@ Add the following activity next to your existing `MainActivity`. This is the ove
 </activity>
 ```
 
-### Step 6
-Make sure to add the jcenter() repository to `build.gradle  (Module :app)` for using this for view binding
+### Step 7
+Since this plugin uses the Camera to scan the MRZ we need to define the Camera permission inside the AndroidManifest.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Add this line-->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+    
+    ...
+
+```
+
+### Step 8
+The plugin uses view binding to access the MRZ camera view. Add compatability inside your app
 
 ```gradle
 android {
+
     ...
+
     dataBinding {
         enabled = true
     }
@@ -75,15 +104,17 @@ android {
         dataBinding true
         viewBinding true
     }
+
+    ...
 }
 ```
 
-### Step 7
+### Step 9
 Add this to your `settings.gradle` so the project library can be found
 ```javascript
 include ':sdk'
 project(':sdk').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/sdk')
 ```
 
-### Step 8
+### Step 10
 Build your project as your normally would with `Capacitor`
