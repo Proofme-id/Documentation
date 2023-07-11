@@ -22,19 +22,6 @@ The plugin uses Capacitor 5 which requires the use of Java 17. To setup Android 
 Sync the project with the plugin: `npx cap sync`
 
 ### Step 4
-Make sure to add the jcenter() repository to `build.gradle  (Project: android)`  for retrieving all necessary dependencies
-
-```gradle
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter()           // <- Add this
-    }
-}
-```
-
-### Step 5
 Inside the `variables.gradle` make sure to have the `minSdkVersion` to a minimum of `28`
 
 ```json
@@ -56,7 +43,7 @@ ext {
 }
 ```
 
-### Step 6
+### Step 5
 Add the following activity next to your existing `MainActivity`. This is the overlay scanner for the MRZ enabling the camera and showing a template of a document card. OCR will be used to extract the necessary information
 ```xml
 <!-- Activity: Camera for MRZ -->
@@ -68,7 +55,7 @@ Add the following activity next to your existing `MainActivity`. This is the ove
 </activity>
 ```
 
-### Step 7
+### Step 6
 Since this plugin uses the Camera to scan the MRZ we need to define the Camera permission inside the AndroidManifest.xml
 
 ```xml
@@ -89,24 +76,48 @@ Since this plugin uses the Camera to scan the MRZ we need to define the Camera p
 
 ```
 
-### Step 8
-The plugin uses view binding to access the MRZ camera view. Add compatability inside your app
+### Step 7
+Add Kotlin support to your app (the library uses Kotlin code)
+
+build.gradle (Module: app)
 
 ```gradle
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android' // <---  Add this
+apply plugin: 'kotlin-kapt' // <---  Add this
+
 android {
-
-    ...
-
-    dataBinding {
-        enabled = true
-    }
-    buildFeatures {
-        dataBinding true
-        viewBinding true
-    }
+    namespace "com.app.example"
 
     ...
 }
+```
+
+### Step 8
+Add Kotlin support to your app (the library uses Kotlin code)
+
+build.gradle (Module: app)
+
+```gradle
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.2'
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20' // <--- Add this
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+apply from: "variables.gradle"
 ```
 
 ### Step 9
@@ -117,4 +128,20 @@ project(':sdk').projectDir = new File('../node_modules/@proofme-id/sdk/web/reade
 ```
 
 ### Step 10
+Add this to your project so databinding is supported (so we can draw on the MRZ overlay)
+
+```gradle
+android {
+
+    ...
+
+    dataBinding {
+        enabled = true
+    }
+
+    ...
+}
+```
+
+### Step 11
 Build your project as your normally would with `Capacitor`
