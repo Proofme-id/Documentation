@@ -16,20 +16,6 @@ npm install @proofme-id/sdk
 Sync the project with the plugin: `npx cap sync`
 
 ### Step 3
-Add the pod to your Podfile
-```javascript
-...
-
-target 'App' do
-  capacitor_pods
-  # Add your Pods here
-  pod 'CapacitorPluginEpassReader', :path => '../../node_modules/@proofme-id/sdk/web/reader'
-end
-
-...
-```
-
-### Step 4
 Add the following to your Podfile so that all files can be found
 ```javascript
 ...
@@ -44,10 +30,10 @@ end
 ...
 ```
 
-### Step 5
+### Step 4
 Actually install the pods `pod install`
 
-### Step 6
+### Step 5
 Add the following usage descriptions to your Info.plist file
 
 ```xml
@@ -57,7 +43,7 @@ Add the following usage descriptions to your Info.plist file
 <string>To scan your passport information</string>
 ```
 
-### Step 7
+### Step 6
 Add the following ISO7816 identifiers (type of NFC tags we want to scan) to the Info.plist file
 ```xml
 <key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
@@ -67,10 +53,12 @@ Add the following ISO7816 identifiers (type of NFC tags we want to scan) to the 
 </array>
 ```
 
-### Step 8
-Add the `Near Field Communication Tag Reading` capability to your project for reading NFC. Do this by going to `Signing & Capabilities` under the `App` tab. Then click on `+ Capability`
+### Step 7
+Add the `Near Field Communication Tag Reading` capability to your project for reading NFC. Do this by going to `Signing & Capabilities` under the `App` tab. Then click on `+ Capability`. Make sure you enabled this for `debug` ánd `release`. If you only enable this for `debug` it won't work in a Testflight / App store build
 
-### Step 9
+Also make sure to enable the `NFC Tag Reading` capability inside the App Identifier on https://developer.apple.com/
+
+### Step 8
 Add a localization file to your project so we can add translations for the NFC overlay. Do this by going to `File` -> `New` -> `File...` -> `Strings File` -> Save as `Localizable` -> `Create`.
 
 Now double click on the file, on the right the `File inspector` opens. Click on `Localize...`. Now you can select the languages you want to configure. Use the keys below to add translations for your likings. All translation keys used are listed below
