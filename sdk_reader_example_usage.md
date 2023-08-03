@@ -1,6 +1,8 @@
 # Example usage
 Below you can find a step by step instruction of how to use certain parts of the MRZ and NFC.
 
+# 1 - Initialising
+
 ## Initialising the SDK
 Before using the SDK you need to setup your JWT key which you received by registering one through the Proofme Dashboard. You can use the test key for development and the production key for your app in the app stores. `Without initialising the SDK first, you will not be able to use the functions inside the SDK`
 
@@ -15,6 +17,8 @@ async initializeSdk(): Promise<void> {
     }
 }
 ```
+
+# 2 - MRZ
 
 ## Reading the MRZ
 This opens an overlay which will open the camera and use OCR (Optical character recognition) with a regex pattern to find the correct MRZ for an `ID card / passport`. This will result in basic information such as first name, lastname, document number, birth date, document expiry date etc.
@@ -41,6 +45,8 @@ interface IMrzCredentials {
 ```
 
 Use the information as you wish. If you want to continue to the NFC scan you need to use the `documentNumber`, `birthDate` and `expiryDate`. These three values serve as sort of a password to read the NFC chip on the document
+
+# 3 - NFC
 
 ## Reading the document with NFC
 To read the NFC we need the the `documentNumber`, `birthDate` and `expiryDate`. If one of these values are incorrect, you will receive a promise rejection.
@@ -187,6 +193,21 @@ import { JP2Decoder } from "@proofme-id/sdk/web/reader";
 try {
     const imageObject = await JP2Decoder.convertJP2toJPEG({ image: dg2Data });
     const jpegImage = imageObject.image;
+} catch (error) {
+    console.error(error);
+}
+```
+
+# 4 - Passphoto
+This function will use face recognition to retrieve the passphoto from the camera. It has to be a certain minimal width and will automatically adjust the rotation. The "face" key will have a base64 image value containing the passphoto
+
+```javascript
+try {
+    const photoScannerResult = await PassphotoScanner.scan();
+    if (photoScannerResult) {
+        this.passportPhoto = photoScannerResult.face;
+        console.log("Passport photo: ", this.passportPhoto);
+    }
 } catch (error) {
     console.error(error);
 }
