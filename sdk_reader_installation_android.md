@@ -1,15 +1,16 @@
 # Installation Android
 
 ### Step 1
-Before installing the SDK, you need to have access to the [Proofme SDK NPM registry](https://github.com/orgs/Proofme-id/packages/npm/package/sdk) and [create a github Personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic)  
-Add the following to ~/.npmrc to be able to download the package (use command `npm config edit` or your favorite text editor):
+Before installing the SDK, you need to have access to the `Proofme package registry`. 
+Add the following to ~/.npmrc to be able to download the package:
 ```
-//npm.pkg.github.com/:_authToken=<YOUR PERSONAL ACCESS TOKEN>
-@proofme-id:registry=https://npm.pkg.github.com
+@proofme-id:registry=https://packages.didux.network/
+//packages.didux.network/:_authToken="YOUR_ORGANISATION_TOKEN"
 ```
-Then install the sdk in your project:
+
+Then install the NPM packages
 ```
-npm install @proofme-id/sdk
+npm install
 ```
 
 ### Step 2
