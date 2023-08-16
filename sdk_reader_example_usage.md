@@ -41,10 +41,15 @@ interface IMrzCredentials {
     documentType: string;
     firstNames: string;
     lastName: string;
+    documentNumberCheckDigitCorrect: boolean;
+    expiryDateCheckDigitCorrect: boolean;
+    birthDateCheckDigitCorrect: boolean;
 }
 ```
 
 Use the information as you wish. If you want to continue to the NFC scan you need to use the `documentNumber`, `birthDate` and `expiryDate`. These three values serve as sort of a password to read the NFC chip on the document
+
+The check digit booleans are there so your application can show the proper steps to what to do next or ignore the check digits. There are several belgium ID cards with a known error inside the MRZ. However it is highly recommended not to ignore them since they serve as an important check on the validity of the `documentNumber`, `birthDate` and `expiryDate`
 
 # 3 - NFC
 
