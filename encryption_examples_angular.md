@@ -46,7 +46,7 @@ export class PgpProvider {
 }
 ```
 
-### CryptoUtils
+### CryptoProvider
 This class is being used to encrypt / decrypt the identification data
 
 ```
@@ -54,7 +54,13 @@ import { Injectable } from "@angular/core";
 import { ICredentialObject } from "@proofmeid/webrtc-web";
 import CryptoJS from "crypto-js";
 import { firstValueFrom } from "rxjs";
+import { UserStateFacade } from "../state/user/user.facade";
 import { PgpProvider } from "./pgp.provider";
+
+export enum EEncryptionMode {
+    CBC = "CBC",
+    GCM = "GCM"
+}
 
 @Injectable({
     providedIn: "root"
@@ -62,25 +68,98 @@ import { PgpProvider } from "./pgp.provider";
 export class CryptoProvider {
     
     constructor(
+        private userStateFacade: UserStateFacade,
         private pgpProvider: PgpProvider
     ) {
 
     }
     
-    async encrypt(message: string, secret: string): Promise<string> {
-        return CryptoJS.AES.encrypt(message, secret).toString();
+    async encrypt(message: string, secret: string, encryptionMode: EEncryptionMode): Promise<string> {
+        if (encryptionMode === EEncryptionMode.CBC) {
+            return CryptoJS.AES.encrypt(message, secret).toString();
+        } else if (encryptionMode === EEncryptionMode.GCM) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(message);
+
+            // Generate a random 12-byte IV (Initialization Vector)
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+
+            // Import the secret key
+            const keyBuffer = await crypto.subtle.importKey(
+                "raw",
+                encoder.encode(secret),
+                "AES-GCM",
+                false,
+                ["encrypt"]
+            );
+
+            // Encrypt the data using GCM mode
+            const encryptedData = await crypto.subtle.encrypt(
+                {
+                    name: "AES-GCM",
+                    iv: iv
+                },
+                keyBuffer,
+                data
+            );
+
+            // Combine IV and ciphertext
+            const encryptedArray = new Uint8Array([...iv, ...new Uint8Array(encryptedData)]);
+
+            // Convert the encrypted data to a base64-encoded string
+            return btoa(String.fromCharCode(...encryptedArray));
+        }
     }
 
-    async decrypt(cipherText: string, secret: string): Promise<string> {
-        return CryptoJS.AES.decrypt(cipherText, secret).toString(CryptoJS.enc.Utf8);
+    async decrypt(cipherText: string, secret: string, encryptionMode: EEncryptionMode): Promise<string> {
+        if (encryptionMode === EEncryptionMode.CBC) {
+            return CryptoJS.AES.decrypt(cipherText, secret).toString(CryptoJS.enc.Utf8);
+        } else if (encryptionMode === EEncryptionMode.GCM) {
+            const decoder = new TextDecoder();
+            const encryptedArray = new Uint8Array([...atob(cipherText)].map(char => char.charCodeAt(0)));
+
+            // Extract IV from the first 12 bytes
+            const iv = encryptedArray.slice(0, 12);
+
+            // Extract ciphertext from the remaining bytes
+            const ciphertext = encryptedArray.slice(12);
+
+            // Import the secret key
+            const keyBuffer = await crypto.subtle.importKey(
+                "raw",
+                new TextEncoder().encode(secret),
+                "AES-GCM",
+                false,
+                ["decrypt"]
+            );
+
+            // Decrypt the data using GCM mode
+            const decryptedData = await crypto.subtle.decrypt(
+                {
+                    name: "AES-GCM",
+                    iv: iv
+                },
+                keyBuffer,
+                ciphertext
+            );
+
+            // Convert the decrypted data back to a string
+            const decryptedMessage = decoder.decode(decryptedData);
+
+            return decryptedMessage;
+        } else {
+            console.error(`Encryption mode ${encryptionMode} not defined`);
+        }
     }
 
-    async decryptCredentials(encryptedCredentials: string, encryptedEncryptionSecret: string, pgpPrivateKey: string): Promise<ICredentialObject> {
-        const decryptedEncryptionSecret = (await this.pgpProvider.decrypt(encryptedEncryptionSecret, pgpPrivateKey)).data.toString();
-        const decryptedData: ICredentialObject = JSON.parse(await this.decrypt(encryptedCredentials, decryptedEncryptionSecret));
+    async decryptCredentials(encryptedCredentials: string, encryptedEncryptionSecret: string, encryptionMode: EEncryptionMode): Promise<ICredentialObject> {
+        const userPgpPrivateKey = await firstValueFrom(this.userStateFacade.userPgpPrivateKey$);
+        const decryptedEncryptionSecret = (await this.pgpProvider.decrypt(encryptedEncryptionSecret, userPgpPrivateKey)).data.toString();
+        const decryptedData: ICredentialObject = JSON.parse(await this.decrypt(encryptedCredentials, decryptedEncryptionSecret, encryptionMode));
         return decryptedData;
     }
 }
+
 ```
 
 ### Complete example code encrypting
@@ -89,6 +168,7 @@ export class CryptoProvider {
 import { PgpProvider } from "./pgp.provider";
 import { CryptoUtils } from "./cryptoUtils.provider";
 import { v4 } from "uuid";
+import { EEncryptionMode } from "./enums/encryptionMode.enum";
 
 @Component({
     selector: "app-example-decrypt-page",
@@ -179,7 +259,7 @@ export class ExampleEncryptPageComponent {
                 }
             }
         };
-        const encryptedData = await this.cryptoProvider.encrypt(JSON.stringify(credentials), encryptionSecret);
+        const encryptedData = await this.cryptoProvider.encrypt(JSON.stringify(credentials), encryptionSecret, EEncryptionMode.GCM);
         const encryptKeysList = [
             keys.publicKey
         ];
@@ -215,6 +295,7 @@ Variables encryptedData, encryptedEncryptionSecret and pgpPrivatekey (keys.priva
 
 ```
 import { CryptoUtils } from "./cryptoUtils.provider";
+import { EEncryptionMode } from "./enums/encryptionMode.enum";
 
 @Component({
     selector: "app-example-decrypt-page",
@@ -229,8 +310,8 @@ export class ExampleDecryptPageComponent {
 
     }
 
-    async decryptCredentials(encryptedData: string, encryptedEncryptionSecret: string, pgpPrivatekey: string): Promise<void> {
-        const decryptedCredentials = await this.cryptoProvider.decryptCredentials(encryptedData, encryptedEncryptionSecret, pgpPrivatekey);
+    async decryptCredentials(encryptedData: string, encryptedEncryptionSecret: string, pgpPrivatekey: string, encryptionMode: EEncryptionMode): Promise<void> {
+        const decryptedCredentials = await this.cryptoProvider.decryptCredentials(encryptedData, encryptedEncryptionSecret, pgpPrivatekey, encryptionMode);
         console.log("decryptedCredentials:", JSON.stringify(decryptedCredentials));
     }
 }

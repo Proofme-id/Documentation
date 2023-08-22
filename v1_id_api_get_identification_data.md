@@ -98,6 +98,8 @@ Content-Type: application/json
             "encryptedEncryptionSecret": "-----BEGIN PGP MESSAGE-----\n\nwV4DF/+sVALDSR0SAQdAc/Ns12fegs97lJxHO4c4yy+fW1r8cwoIUnW6/tNT\nPyIws3FWhF3z76hpOSXV6GBC+3q1l3cvVVAl89nbhtsMtXPmFWldFlF0lcRF\nWfiMA+sVwV4Dn872q4T7yxQSAQdA/j38MwkcKzf8bMndcui2X1UTkafEt6+0\n0WNA3OzQTCowRrWQgz1GJgGBlnTd+bSbiVw11v8kf4X0TyctEQT5YaSY5Dfx\naWNBlPPTvZqY37DAwV4Dd69eEU0AmBUSAQdAJyJTaOu9+la0MOPctr3nCcfg\no8M3PBXL7uqJ3K248Xcwp6XHhTwxLJttH6FQtgaSeqokbsp89j/S9KZ0v80h\nTFNEvetDQpCsHoyu36ogSRyBwV4D1is0jCAPUy0SAQdAWVsfJwcs0CPGSfPW\nSKb0WXzXqDhqJSn9R9LHlzz6zCgwFWWVe65aguV+6GiBHBTjvxn1F+63tB5m\noHP3iz71vXzI5mGKGvO8SvlUMeY8qMUH0lUBY6qaKOVBvSI1jFkt4g1LVu8I\nySdSdRBc4d6tyIbCRy6m8+HH/4g2vZOO6CumKHjMF+5OfDmiR9tkzldmZcct\nNdBL8KgFzsGg+K4iGwTG4F9/Vxtr\n=28TC\n-----END PGP MESSAGE-----\n",
             "storage": "DATABASE",
             "additionalInfo": [],
+            "destroyDate": null,
+            "encryptionMode": "GCM",
             "createdAt": "2022-01-01T12:00:00+00:00",
             "updatedAt": "2022-01-01T12:00:00+00:00"
         }
