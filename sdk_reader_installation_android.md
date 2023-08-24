@@ -122,10 +122,13 @@ apply from: "variables.gradle"
 ```
 
 ### Step 9
-Add this to your `settings.gradle` so the project library can be found
+Add this to your `settings.gradle` so the project libraries can be found
 ```javascript
 include ':sdk'
 project(':sdk').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/sdk')
+
+include ':jp2'
+project(':jp2').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/jp2')
 ```
 
 ### Step 10
