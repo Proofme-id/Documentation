@@ -3,18 +3,20 @@
 Webhooks are used to process real-time status updates, for example when an identification took place. It is a URL Proofme will call with the ID of the updated object. When Proofme calls your webhook, you should fetch the latest status and process it if the status was changed.
 
 ## Example
-The most important example of a webhook is when an identification took place. If you created the identification with a webhook URL, we will call that webhook URL with a single POST-parameter called `id` and a value of for example `tr_d0b0E3EA3v`. The script behind your webhook URL should use that ID to fetch the identification status and act accordingly. If the new status is `completed` you can finish the process.
+The most important example of a webhook is when an identification took place. If you created the identification with a webhook URL, we will call that webhook URL with a single POST-parameter called `id` and a value of for example `ua3-ams-prd-1692971978.15306111`. The script behind your webhook URL should use that ID to fetch the identification status and act accordingly. If the new status is `completed` you can finish the process.
 
 ```bash
 POST /orders/webhook HTTP/1.0
 Host: webshop.example.org
 Via: 1.1 tinyproxy (tinyproxy/1.8.3)
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 Accept: */*
 Accept-Encoding: deflate, gzip
-Content-Length: 16
+Content-Length: 54
 
-id=tr_d0b0E3EA3v
+{
+    "id": "ua3-ams-prd-1692971978.15306111"
+}
 ```
 
 It might seem a little cumbersome that we do not post the new status immediately, but proper security dictates this flow. Since the status is not transmitted in the webhook, fake calls to your webhook will never result in orders being processed without being actually updated.
