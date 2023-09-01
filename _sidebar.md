@@ -8,6 +8,10 @@
   * [Build your own MyPage](intro_byo_mypage.md)
   * [On-premise MyPage](intro_onpremise_mypage.md)
 
+* Host your own identification page
+  * [Overview](custom_identification_page.md)
+  * [Example usage](custom_identification_page_example.md)
+
 * Proofme SDK
   * [Overview](sdk_overview.md)
   * [Reader](sdk_reader.md)
