@@ -1,6 +1,76 @@
-# Example parts
+# Example usage
+# Step 1: Define these interfaces / enums
+These interfaces / enums will be used in the code as of reference
+```javascript
+export enum EErrorTypes {
+    NONE = "NONE",
+    IDENTIFICATION_NOT_FOUND = "IDENTIFICATION_NOT_FOUND",
+    IDENTIFICATION_ALREADY_FINISHED = "IDENTIFICATION_ALREADY_FINISHED"
+}
 
-# Step 1: Get the My Page configuration
+export enum EIdentificationStatus {
+    PENDING = "PENDING",
+    REVOKED = "REVOKED",
+    FAILED = "FAILED",
+    SUCCESS = "SUCCESS"
+}
+
+export enum EQRStatusType {
+    LOADING = "LOADING",
+    READY = "READY",
+    SCANNED = "SCANNED",
+    SUCCESS_IDENTIFICATION = "SUCCESS_IDENTIFICATION",
+    ERROR = "ERROR",
+    DISCONNECTED = "DISCONNECTED",
+}
+
+export enum EWebsocketMessageType {
+    HOST = "host",
+    CLIENT_CONNECTED = "clientconnected",
+    DISCONNECT = "disconnect",
+    RESULT = "result"
+}
+
+
+export interface IMyPageConfig {
+    color: string;
+    logoLocation: string;
+    bannerLocation: string;
+    faviconLocation: string;
+    url: string;
+    proofme: IProofme; 
+    title: string;
+    organisationId?: string;
+    publicIdentifications?: string;
+}
+
+import { IRequestedCredentials } from "@proofmeid/webrtc-web";
+
+export interface IProofme {
+    howIsDataBeingSaved: string;
+    id: string;
+    isDataBeingSaved: boolean;
+    name: string;
+    organisationId: string;
+    requestedCredentials: IRequestedCredentials;
+    redirectUrl: string
+}
+
+export interface IIdentification {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    isRequest: boolean;
+    description: string;
+    organisationId: string;
+    proofmeId: string;
+    status: EIdentificationStatus;
+    proofme: IProofme;
+    redirectUrl?: string;
+}
+```
+___
+# Step 2: Get the My Page configuration
 Get the My Page configuration by the current domain so we can retrieve the configuration for it.
 ```javascript
 getMyPageConfig(subdomain: string): Promise<{ myPage: IMyPageConfig, domain: string }> {
@@ -9,8 +79,8 @@ getMyPageConfig(subdomain: string): Promise<{ myPage: IMyPageConfig, domain: str
     ));
 }
 ```
-
-# Step 2: Setup a websocket connection with the IPSP-Api
+___
+# Step 3: Setup a websocket connection with the IPSP-Api
 Setup a websocket connection as host to retrieve the channel ID
 ```javascript
 import { WebRtcProvider } from "@proofmeid/webrtc-web";
@@ -41,8 +111,8 @@ async setupWsConnection(): Promise<void> {
     ...
 }
 ```
-
-# Step 3: Websocket message listener
+___
+# Step 4: Websocket message listener
 Setup a websocket data listener to receive messages and update the UI accordingly
 
 ```javascript
@@ -65,6 +135,7 @@ this.webRtcProvider.websocketMessage$.subscribe(async data => {
 });
 ```
 
+___
 # Complete example Typescript
 
 This is all in one overview just for documentation example purposes
@@ -306,35 +377,6 @@ export class IPSPApiProvider {
     }
 }
 
-export enum EErrorTypes {
-    NONE = "NONE",
-    IDENTIFICATION_NOT_FOUND = "IDENTIFICATION_NOT_FOUND",
-    IDENTIFICATION_ALREADY_FINISHED = "IDENTIFICATION_ALREADY_FINISHED"
-}
-
-export enum EIdentificationStatus {
-    PENDING = "PENDING",
-    REVOKED = "REVOKED",
-    FAILED = "FAILED",
-    SUCCESS = "SUCCESS"
-}
-
-export enum EQRStatusType {
-    LOADING = "LOADING",
-    READY = "READY",
-    SCANNED = "SCANNED",
-    SUCCESS_IDENTIFICATION = "SUCCESS_IDENTIFICATION",
-    ERROR = "ERROR",
-    DISCONNECTED = "DISCONNECTED",
-}
-
-export enum EWebsocketMessageType {
-    HOST = "host",
-    CLIENT_CONNECTED = "clientconnected",
-    DISCONNECT = "disconnect",
-    RESULT = "result"
-}
-
 ```
 
 # Complete example HTML
@@ -373,7 +415,7 @@ export enum EWebsocketMessageType {
 
 # Complete example SCSS
 ```scss
-@use "sass-rem" as *;
+@use "sass-rem" as *; // This is from the package 'sass-rem' on npm
 
 .main {
     display: flex;

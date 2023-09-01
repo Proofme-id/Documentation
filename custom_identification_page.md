@@ -10,7 +10,7 @@ To retrieve the configuration for the domain simply make a GET call:
 
 Example
 ```
-https://api-test.proofme.id/v1/customMyPage/url/http%3A%2F%2Flocalhost.com%3A4300
+https://api.proofme.id/v1/customMyPage/url/http%3A%2F%2Flocalhost.com%3A4300
 ```
 
 ### QR-Code
@@ -29,7 +29,7 @@ URL decoded: `da451ba2-fcb3-40b0-8a3f-b3f5b9676709:wss://api.proofme.id:443`<br>
 <b>Query parameter part 2:</b> wss://api.proofme.id:443 - The websocket endpoint to connect to. We first setup a websocket connection, then information is being exchanged into a P2P connection between Proofme App and IPSP-Api <br>
 
 ### Mobile button
-So a QR code is an easy way to let the client make a connection. But what if the user opens that page on their mobile phone, they cannot scan a QR code on their own phone screen. An easy way to handle this is to use the deeplink functionality that the Proofme App accepts and put this link inside a button for the user to press.
+A QR code is an easy way to let the client make a connection. The user cannot scan the QR code on their own phone screen, which is why we use the deeplink functionality. An easy way to handle this is to use the deeplink functionality that the Proofme App accepts and put this link inside a button for the user to press.
 
 Example deeplink: <br>
 `https://proofme.id/app?p=4204eda3-1e67-4d47-9fbc-11658609de64:wss:%2F%2Fapi.proofme.id:443`<br>
@@ -43,13 +43,15 @@ To host a connection (receive a channel ID) setup a connection with either the P
 Example with a Proofme ID<br>
 `wss://api.proofme.id/?channel=undefined&data=proofme:b7264dd0-b9f4-479f-adc3-db7c3d0cdcf3`
 
-Example with a Identification ID<br>
+Example with an Identification ID<br>
 `wss://api.proofme.id/?channel=undefined&data=id:505c0af1-4807-41ed-83ba-d0f0c2571815`
 
-Notice the channel value which is undefined. The host receives a channel ID this way for the client to connect to so the host himself can't define this. <br>
-Once the websocket connection is successfully made, we receive messages in JSON. Below an overview of messages to receive. 
+Notice the channel value which is undefined. The host receives a channel ID this way for the client to connect to so the host itself can't define this. <br>
+Once the websocket connection is successfully made, we receive messages in JSON. 
 
-# "host"
+## Below an overview of messages to receive. 
+___
+#### host
 
 This type will give back a channelId on which the client can connect to with some other minor information.
 
@@ -63,9 +65,8 @@ Example:
     "type" : "host" 
 }
 ```
-
-# "clientconnected"
-
+___
+#### clientconnected
 This type will give a message so that the host knows a client has connected and you can update the QR code in some way
 
 Example:
@@ -75,9 +76,8 @@ Example:
     "success": true
 }
 ```
-
-# "disconnect"
-
+___
+#### disconnect
 This type will give a message so that the host knows the client disconnected. Now you can either show a button for a retry or simply refresh the connection.
 
 Example:
@@ -86,9 +86,8 @@ Example:
     "type": "disconnect", 
 }
 ```
-
-# "result"
-
+___
+#### result
 This type will give information about the identification status. It is either a success or failure. Data is not being sent to the host directly due to security reasons. Receive the encrypted identification data through our API
 
 Example success response:
