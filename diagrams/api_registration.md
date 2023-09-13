@@ -5,11 +5,11 @@
 The registration diagram describes how the API registration takes place.
 Components involved:
 
-* [Dashboard](components_dashboard.md)
-* [ProofMe Api](components_api.md)
-<!-- * [Licence service](components_license.md) -->
-<!-- * [Stats service](components_stats.md) -->
-<!-- * [Didux node](components_node.md) -->
+* [Dashboard](components/dashboard.md)
+* [ProofMe Api](components/api.md)
+* [Licence service](components/license.md)
+* [Stats service](components/stats.md)
+* [Didux node](components/node.md)
 
 ## Diagram
 

@@ -4,7 +4,7 @@
 
 # Draw.io files
 
-[filename](_media/IPSP-Overview.drawio ':include :type=code')
+[filename](media/IPSP-Overview.drawio ':include :type=code')
 
 # Use tabs with code
 

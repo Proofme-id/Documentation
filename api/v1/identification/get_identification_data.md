@@ -14,7 +14,7 @@ ___
 
 ## Encrypted
 
-Please note the identification data is encrypted. Refer to this page how to decrypt: [Decrypt identification data](decrypt_identification_data_node.md)
+Please note the identification data is encrypted. Refer to this page for more information about encryption/decryption: [encryption overview](encryption/overview.md)
 
 ___
 ## Response

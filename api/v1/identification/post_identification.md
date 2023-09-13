@@ -5,7 +5,7 @@ Create a new identification intent, this is where most identification implementa
 
 Once you have created an identification, you should redirect your customer to the URL in the `MyPageUrl` property from the response.
 
-To wrap your head around the identification process, an explanation and flow charts can be found in the [Identifications](intro_identifications.md) guide.
+To wrap your head around the identification process, an explanation and flow charts can be found in the [Identifications](intro/identifications.md) guide.
 
 ## Parameters
 ___
@@ -72,7 +72,7 @@ ___
 ## Response
 
 `201` application/json  
-An identification object is returned, as described in [Get identification](v1_id_api_get_identification.md).
+An identification object is returned, as described in [Get identification](api/v1/identification/get_identification.md).
 
 # Request
 

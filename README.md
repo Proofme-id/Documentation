@@ -1,4 +1,4 @@
-![logo](_media/logo.svg)
+![logo](media/logo.svg)
 
 > This documentation is still WORK IN PROGRESS and receives updates on a weekly basis.
 
