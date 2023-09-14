@@ -29,13 +29,19 @@
   * [Handling errors](api/errors.md)
   * [Webhooks](api/webhooks.md)
   <!-- * [Pagination](api/pagination.md) -->
-  * [Identification API (V1)](api/v1/identification/api_intro.md)
+  * [Identification API](api/v1/identification/api_intro.md)
     * [Create identification](api/v1/identification/post_identification.md)
     * [Get identification list](api/v1/identification/get_identification_list.md)
     * [Get identification](api/v1/identification/get_identification.md)
     * [Get (encrypted) identification data](api/v1/identification/get_identification_data.md)
     * [Delete identification data](api/v1/identification/delete_identification_data.md)
     * [Revoke identification](api/v1/identification/revoke_identification.md)
+  * [Document API](api/v1/document/api_intro.md)
+    * [Create document](api/v1/document/post_document.md)
+    * [Get document list](api/v1/document/get_document_list.md)
+    * [Get document](api/v1/document/get_document.md)
+    * [Download document](api/v1/document/download_document.md)
+    * [Delete document](api/v1/document/delete_document.md)
 
 * Encrypt / decrypt data
   * [Overview](encryption/overview.md)  

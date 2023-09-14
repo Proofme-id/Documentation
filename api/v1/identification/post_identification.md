@@ -82,7 +82,7 @@ An identification object is returned, as described in [Get identification](api/v
 
 ```bash
 curl -X POST https://api.proofme.id/v1/identification \
-   -H "Authorization: proofme_cFC70rNLNpL8y3C24u3eJLvtmFPBd4B0" \
+   -H 'authorization: <JWT or apikey>' \
    -d "description=New description" \
    -d "proofmeId=03682de3-b51c-451c-b50e-1977a332c9f2" \
    -d "redirectUrl=https://your-application.example.org/redirect/" \

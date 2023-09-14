@@ -6,27 +6,27 @@ In its simplest form, processing a document requires only three steps: setting u
 
 ## Endpoints
 
-##### [Create document](/#/document/v1/api_intro.md)
+##### [Create document](api/v1/document/post_document.md)
 `POST /v1/document`
 
 Create a new document signature intent.
 
-##### [Get document list](/#/document/v1/api_intro.md)
+##### [Get document list](api/v1/document/get_document_list.md)
 `GET /v1/document`
 
 Retrieve a list of all document signing intents.
 
-##### [Get document details](/#/document/v1/api_intro.md)
+##### [Get document details](api/v1/document/get_document.md)
 `GET /v1/document/:id`
 
 Retrieve document details.
 
-##### [Download document](/#/document/v1/api_intro.md)
+##### [Download document](api/v1/document/download_document.md)
 `GET /v1/document/download/:id`
 
 Retrieve the (encrypted) document.
 
-##### [Delete document](/#/document/v1/delete_document.md)
+##### [Delete document](api/v1/document/delete_document.md)
 `DELETE /v1/document/:id`
 
 Revoke a specific document intent.
