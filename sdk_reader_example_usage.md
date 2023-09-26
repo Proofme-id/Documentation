@@ -54,13 +54,13 @@ The check digit booleans are there so your application can show the proper steps
 # 3 - NFC
 
 ## Reading the document with NFC
-To read the NFC we need the the `documentNumber`, `birthDate` and `expiryDate`. If one of these values are incorrect, you will receive a promise rejection.
+To read the NFC we need the the `documentNumber`, `birthDateDigits` and `expiryDateDigits`. If one of these values are incorrect, you will receive a promise rejection.
 
 ```javascript
 const scanOptions: IScanOptions = {
     documentNumber: this.mrzCredentials.documentNumber,
-    birthDate: this.mrzCredentials.birthDate,
-    expiryDate: this.mrzCredentials.expiryDate,
+    birthDate: this.mrzCredentials.birthDateDigits,
+    expiryDate: this.mrzCredentials.expiryDateDigits,
     dataGroups: [EDataGroup.DG1, EDataGroup.DG2]
 }
 this.datagroups = await EpassReader.scanNfc(scanOptions);
