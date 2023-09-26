@@ -25,6 +25,7 @@ An identification object is returned.
 
 ```bash
 curl -X GET https://api.proofme.id/v1/identification/cb04b19b-e157-46ec-ba8d-1fba17828a5b \
+     -H 'authorization: <JWT or apikey>'
 ```
 
 <!-- tabs:end -->

@@ -19,13 +19,13 @@ Of course it’s very important to keep any authentication keys secure. Do not e
 
 ## Authenticating an API call
 
-The API key or token must be sent along with each API request, by providing it in the HTTP call’s Authorization header using the Bearer method. For example: a valid Authorization header is Bearer test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM. Our default API clients provide shortcuts to easily set the API key or access token.
+The API key or JWT-token must be sent along with each API request, by providing it in the HTTP call’s Authorization header using the apikey method. For example: a valid Authorization header is `proofme_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM`. Our default API clients provide shortcuts to easily set the API key or access token.
 
 In the example below we use a Test API key on the GET method of the identification resource. This method fetches a request - in this case the request with the fictional request ID tr_WDqYK6vllg.
 
 ```bash
 curl -X GET https://api.proofme.id/v1/request/tr_WDqYK6vllg \
-    -H "Authorization: Bearer test_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM"
+    -H "Authorization: proofme_dHar4XY7LxsDOtmnkVtjNVWXLSlXsM"
 ```
 
 The response will be JSON.

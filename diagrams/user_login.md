@@ -5,11 +5,11 @@
 The user login diagram describes how the user login takes place.
 Components involved:
 
-* [Dashboard](components_dashboard.md)
-* [ProofMe Api](components_api.md)
-* [Signal service](components_signalling.md)
-* [Turn service](components_turn.md)
-* [Didux node](components_node.md)
+* [Dashboard](components/dashboard.md)
+* [ProofMe Api](components/api.md)
+* [Signal service](components/signalling.md)
+* [Turn service](components/turn.md)
+* [Didux node](components/node.md)
 
 ## Diagram
 

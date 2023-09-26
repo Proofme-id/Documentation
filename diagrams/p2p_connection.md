@@ -5,9 +5,9 @@
 Detailed description of P2P connection setup.
 Components involved:
 
-* [Dashboard](components_dashboard.md) as Host
-* [Signal service](components_signalling.md)
-* [Turn service](components_turn.md)
+* [Dashboard](components/dashboard.md) as Host
+* [Signal service](components/signalling.md)
+* [Turn service](components/turn.md)
 
 ## Diagram
 

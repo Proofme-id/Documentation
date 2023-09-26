@@ -1,4 +1,4 @@
-![logo](_media/logo.svg)
+![logo](media/logo.svg)
 
 # documentation
 

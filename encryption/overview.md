@@ -18,12 +18,12 @@ Each API key has his own PGP keys generated for them. The private key will be do
 Once the identification is received, we generate a v4 string to encrypt the identification data. The secret is beign encrypted by PGP public keys.
 
 <div class="small-image">
-    <img src="/_media/encryption.png" alt="encryption">
+    <img src="../media/encryption.png" alt="encryption">
 </div>
 
 # Diagram decryption
 To decrypt the identification data we first decrypt the secret with the PGP private key. Then we can decrypt the identification data with the secret.
 
 <div class="small-image">
-    <img src="/_media/decryption.png" alt="decryption">
+    <img src="/media/decryption.png" alt="decryption">
 </div>
