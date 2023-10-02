@@ -219,3 +219,107 @@ try {
     console.error(error);
 }
 ```
+
+# 5 - Document scan
+This function will scan the whole document in one go. 
+
+<b>ID-card</b><br>
+It will require two photos; back and front. MRZ + passphoto will be returned. There will be (depending on configuration) a rotation screen between the back and front step. The user can click a button to take the photo
+
+<b>Passport</b><br>
+It will require one photo; front. MRZ + passphoto will be returned. The user can click a button to take the photo
+
+Below an example of how to start this functionality. The argument is optional and is explained in step <b>"5.1 - Document scan options"</b>
+
+```javascript
+const documentInfo = await EpassReader.scanDocument({
+    translations: {
+        frontScan: "Scan front",
+        backScan: "Scan back",
+        processing: "Processing...",
+        rotate: "Please rotate the document"
+    }
+});
+```
+
+This function will return the following interface
+```javascript
+interface IScanDocumentResult {
+    frontPhoto: string;
+    backPhoto?: string;
+    mrz?: IMrzCredentials;
+    face?: string;
+    errors?: string[];
+}
+```
+___
+#### frontPhoto
+_string_ `REQUIRED`
+
+The front photo of the document
+___
+
+#### backPhoto
+_string_ `OPTIONAL`
+
+The back photo of the document
+___
+
+#### mrz
+_string_ `OPTIONAL`
+
+The MRZ credentials in key / value
+___
+
+#### face
+_string_ `OPTIONAL`
+
+The passphoto in a JPEG base64
+___
+
+#### errors
+_string[]_ `OPTIONAL`
+
+Various errors / uncertainties about the results in a string array
+___
+
+# 5.1 - Document scan options
+The following options are available for the document scan:
+
+```javascript
+interface IScanDocumentOptions {
+    autoCloseDuration?: number
+    translations?: {
+        frontScan?: string;
+        processing?: string;
+        rotate?: string;
+        backScan?: string;
+    }
+}
+```
+
+___
+#### autoCloseDuration
+_integer_ `OPTIONAL`
+
+How long the rotation screen should show in miliseconds.
+
+<b>Not defined (default):</b> The screen will show indefinitely; a button on the bottom of the screen will allow the user to manually continue
+
+<b>0:</b> The screen will not show at all, instant front photo to back photo or to result when passport
+
+<b>Anything above 0:</b> This is how long the rotation screen will show and then continue to result or back photo overlay
+
+___
+
+#### translations
+_object_ `OPTIONAL`
+
+Four translation texts are available. If one or none are defined, that text will not be shown in that step
+
+<b>frontScan:</b> The text on the first screen: Scan front of document
+<b>processing:</b> The text on the 'loading' screen: When processing MRZ / passphoto
+<b>rotate:</b> The text that will be shown on the rotate screen if not passport: Rotate document
+<b>backScan:</b> The text that will be shown on the last step if not passport: Scan back of document
+
+___
