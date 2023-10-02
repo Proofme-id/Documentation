@@ -318,8 +318,12 @@ _object_ `OPTIONAL`
 Four translation texts are available. If one or none are defined, that text will not be shown in that step
 
 <b>frontScan:</b> The text on the first screen: Scan front of document
+
 <b>processing:</b> The text on the 'loading' screen: When processing MRZ / passphoto
+
 <b>rotate:</b> The text that will be shown on the rotate screen if not passport: Rotate document
+
 <b>backScan:</b> The text that will be shown on the last step if not passport: Scan back of document
+
 
 ___
