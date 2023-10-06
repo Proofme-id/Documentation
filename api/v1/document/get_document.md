@@ -38,14 +38,11 @@ Content-Type: application/json
 {
   "document": {
     "id": "1175ddb7-4c38-4769-a7bd-c9f23a79b887",
-    "organisationId": "da4a743f-19c8-4515-b686-eec8288e1c3e",
     "verificationLevel": "EMAIL",
     "message": "Your personal message",
     "documentLocation": "organisation/da4a743f-19c8-4515-b686-eec8288e1c3e/docs/1175ddb7-4c38-4769-a7bd-c9f23a79b887",
     "documentName": "data.pdf",
     "myPageUrl": "https://your-application.proofme.app/sign/0e88cf4e-8020-422c-8e61-e26a00e7d7e3",
-    "encryptedDocumentSecret": "-----BEGIN PGP MESSAGE-----\n........\n-----END PGP MESSAGE-----\n",
-    "encryptedInitialVector": "-----BEGIN PGP MESSAGE-----\n........\n-----END PGP MESSAGE-----\n",
     "documentStatus": "PENDING",
     "mimeType": "application/pdf",
     "createdBy": "Apikey",
