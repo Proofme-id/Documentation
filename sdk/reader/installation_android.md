@@ -48,7 +48,7 @@ ext {
 Add the following activity next to your existing `MainActivity`. This is the overlay scanner for the MRZ enabling the camera and showing a template of a document card. OCR will be used to extract the necessary information
 ```xml
 <!-- Activity: Camera for MRZ -->
-<activity android:name="io.didux.plugin.camera.CameraActivity"
+<activity android:name="io.didux.reader.source.camera.CameraActivity"
     android:screenOrientation="landscape"
     android:configChanges="orientation|keyboardHidden|screenSize"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
