@@ -50,6 +50,8 @@ Content-Type: application/json
     "size": 2810173,
     "createdAt": "2023-09-14T11:27:54.229Z",
     "updatedAt": "2023-09-14T11:27:54.229Z",
+    "encryptedDocumentSecret": "-----BEGIN PGP MESSAGE-----\n........\n-----END PGP MESSAGE-----\n",
+    "encryptedInitialVector": "-----BEGIN PGP MESSAGE-----\n........\n-----END PGP MESSAGE-----\n",
     "userDocument": [
       {
         "message": null,
