@@ -80,6 +80,7 @@ Content-Type: application/json
       "fingerprint": "87e3ee65d5774f4bacf504b08641ce4f69bd5b020dc3b004fb78ec2f131a9ff7b22771d663db53033071373ba47a48d7beb4bd8e363ffb04b7c6b7931737e74c",
       "size": 2810173,
       "createdAt": "2023-09-14T11:27:54.229Z",
+      "documentLocation": "organisation/cb86df0e-36eb-4bc9-82ec-0856cbdeb2a2/docs/1175ddb7-4c38-4769-a7bd-c9f23a79b887",
       "userDocument": [
         {
           "message": null,
@@ -106,6 +107,7 @@ Content-Type: application/json
       "fingerprint": "87e3ee65d5774f4bacf504b08641ce4f69bd5b020dc3b004fb78ec2f131a9ff7b22771d663db53033071373ba47a48d7beb4bd8e363ffb04b7c6b7931737e74c",
       "size": 2810173,
       "createdAt": "2023-09-14T10:59:32.083Z",
+      "documentLocation": "organisation/cb86df0e-36eb-4bc9-82ec-0856cbdeb2a2/docs/0e88cf4e-8020-422c-8e61-e26a00e7d7e3",
       "userDocument": [
         {
           "message": null,
