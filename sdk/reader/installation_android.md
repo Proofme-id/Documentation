@@ -27,9 +27,9 @@ Inside the `variables.gradle` make sure to have the `minSdkVersion` to a minimum
 
 ```json
 ext {
-    minSdkVersion = 28              // <- This one
-    compileSdkVersion = 33
-    targetSdkVersion = 33
+    minSdkVersion = 22              // <- This one
+    compileSdkVersion = 34
+    targetSdkVersion = 34
     androidxActivityVersion = '1.7.0'
     androidxAppCompatVersion = '1.6.1'
     androidxCoordinatorLayoutVersion = '1.2.0'
@@ -47,9 +47,9 @@ ext {
 ### Step 5
 Add the following activity next to your existing `MainActivity`. This is the overlay scanner for the MRZ enabling the camera and showing a template of a document card. OCR will be used to extract the necessary information
 ```xml
-<!-- Activity: Camera for MRZ -->
+<!-- Activity: Camera for MRZ (portrait / landscape supported) -->
 <activity android:name="io.didux.reader.source.camera.CameraActivity"
-    android:screenOrientation="landscape"
+    android:screenOrientation="portrait"
     android:configChanges="orientation|keyboardHidden|screenSize"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
     android:windowSoftInputMode="stateAlwaysHidden" >

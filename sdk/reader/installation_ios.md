@@ -67,6 +67,7 @@ Now double click on the file, on the right the `File inspector` opens. Click on 
 #### English translations
 ```english
 "nfc_start_message" = "Put your phone on your ID document";
+"nfc_stop_nfc_message" = "Scanning NFC canceled...";
 "nfc_authenticating" = "Chip found, authenticating...";
 "nfc_reading" = "Reading...";
 "nfc_invalid_tag" = "This chip is not supported";
@@ -81,6 +82,7 @@ Now double click on the file, on the right the `File inspector` opens. Click on 
 #### Dutch translations
 ```dutch
 "nfc_start_message" = "Leg je telefoon op je identiteitsbewijs";
+"nfc_stop_nfc_message" = "Scannen van NFC geannulleerd...";
 "nfc_authenticating" = "Chip gevonden, authenticeren...";
 "nfc_reading" = "Lezen...";
 "nfc_invalid_tag" = "Deze chip wordt niet ondersteund";
