@@ -27,9 +27,9 @@ Inside the `variables.gradle` make sure to have the `minSdkVersion` to a minimum
 
 ```json
 ext {
-    minSdkVersion = 28              // <- This one
-    compileSdkVersion = 33
-    targetSdkVersion = 33
+    minSdkVersion = 22              // <- This one
+    compileSdkVersion = 34
+    targetSdkVersion = 34
     androidxActivityVersion = '1.7.0'
     androidxAppCompatVersion = '1.6.1'
     androidxCoordinatorLayoutVersion = '1.2.0'
@@ -47,9 +47,9 @@ ext {
 ### Step 5
 Add the following activity next to your existing `MainActivity`. This is the overlay scanner for the MRZ enabling the camera and showing a template of a document card. OCR will be used to extract the necessary information
 ```xml
-<!-- Activity: Camera for MRZ -->
+<!-- Activity: Camera for MRZ (portrait / landscape supported) -->
 <activity android:name="io.didux.reader.source.camera.CameraActivity"
-    android:screenOrientation="landscape"
+    android:screenOrientation="portrait"
     android:configChanges="orientation|keyboardHidden|screenSize"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
     android:windowSoftInputMode="stateAlwaysHidden" >
@@ -57,7 +57,7 @@ Add the following activity next to your existing `MainActivity`. This is the ove
 ```
 
 ### Step 6
-Since this plugin uses the Camera to scan the MRZ we need to define the Camera permission inside the AndroidManifest.xml
+Since this plugin uses the Camera to scan the MRZ we need to define the Camera permission inside the `AndroidManifest.xml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -80,7 +80,7 @@ Since this plugin uses the Camera to scan the MRZ we need to define the Camera p
 ### Step 7
 Add Kotlin support to your app (the library uses Kotlin code)
 
-build.gradle (Module: app)
+`build.gradle (Module: app)`
 
 ```gradle
 apply plugin: 'com.android.application'
@@ -97,7 +97,7 @@ android {
 ### Step 8
 Add Kotlin support to your app (the library uses Kotlin code)
 
-build.gradle (Module: app)
+`build.gradle (Module: app)`
 
 ```gradle
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
@@ -122,17 +122,9 @@ apply from: "variables.gradle"
 ```
 
 ### Step 9
-Add this to your `settings.gradle` so the project libraries can be found
-```javascript
-include ':sdk'
-project(':sdk').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/sdk')
+Add this so databinding is supported (to draw on the MRZ overlay)
 
-include ':jp2'
-project(':jp2').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/jp2')
-```
-
-### Step 10
-Add this to your project so databinding is supported (so we can draw on the MRZ overlay)
+`build.gradle (Module: app)`
 
 ```gradle
 android {
@@ -145,6 +137,16 @@ android {
 
     ...
 }
+```
+
+### Step 10
+Add this to your `settings.gradle` so the project libraries can be found
+```javascript
+include ':sdk'
+project(':sdk').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/sdk')
+
+include ':jp2'
+project(':jp2').projectDir = new File('../node_modules/@proofme-id/sdk/web/reader/android/jp2')
 ```
 
 ### Step 11

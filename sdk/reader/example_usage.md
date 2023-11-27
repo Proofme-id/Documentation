@@ -31,21 +31,38 @@ async mrz(): Promise<void> {
 }
 ```
 
+Example of scanning the MRZ for driving licenses:
+```javascript
+async mrz(): Promise<void> {
+    this.mrzCredentials = await EpassReader.scanMrz({ driverLicense: true });
+    console.log("MRZ Credentials:", this.mrzCredentials);
+}
+```
+
 The MRZ credentials will return the following interface:
 ```javascript
-interface IMrzCredentials {
+interface IDocumentCredentials {
     documentNumber: string;
-    birthDate: string;
-    expiryDate: string;
-    gender: string;
-    documentType: string;
-    firstNames: string;
-    lastName: string;
     birthDateDigits: string;
+    birthDate?: Date;
     expiryDateDigits: string;
-    documentNumberCheckDigitCorrect: boolean;
-    expiryDateCheckDigitCorrect: boolean;
-    birthDateCheckDigitCorrect: boolean;
+    issueDate?: string;
+    expiryDate?: Date;
+    gender?: string;
+    documentType: string;
+    firstNames?: string;
+    lastName?: string;
+    issuer?: string;
+    nationality?: string;
+    personalNumber?: string;
+    city?: string;
+    mrz?: string;
+    driverMrzKey?: string;
+    signatureBase64?: string;
+    vehicleCategories?: IVehicleCategory[];
+    documentNumberCheckDigitCorrect?: boolean;
+    expiryDateCheckDigitCorrect?: boolean;
+    birthDateCheckDigitCorrect?: boolean;
 }
 ```
 
@@ -58,12 +75,36 @@ The check digit booleans are there so your application can show the proper steps
 ## Reading the document with NFC
 To read the NFC we need the the `documentNumber`, `birthDateDigits` and `expiryDateDigits`. If one of these values are incorrect, you will receive a promise rejection.
 
+## Passport + ID-Card
 ```javascript
+const datagroups = [
+    EDataGroup.DG1,
+    EDataGroup.DG2
+]
 const scanOptions: IScanOptions = {
-    documentNumber: this.mrzCredentials.documentNumber,
-    birthDate: this.mrzCredentials.birthDateDigits,
-    expiryDate: this.mrzCredentials.expiryDateDigits,
-    dataGroups: [EDataGroup.DG1, EDataGroup.DG2]
+    documentType: mrzResult.documentType,
+    documentNumber: mrzResult.documentNumber,
+    birthDate: mrzResult.birthDateDigits,
+    expiryDate: mrzResult.expiryDateDigits,
+    dataGroups: datagroups
+}
+this.datagroups = await EpassReader.scanNfc(scanOptions);
+console.log("NFC Data groups:", this.datagroups);
+```
+
+## Driving license
+```javascript
+const datagroups = [
+    EDataGroup.DG1,
+    EDataGroup.DG5,
+    EDataGroup.DG6,
+    EDataGroup.DG11,
+    EDataGroup.DG12
+]
+const scanOptions: IScanOptions = {
+    documentType: mrzResult.documentType,
+    driverMrzKey: mrzResult.driverMrzKey,
+    dataGroups: datagroups
 }
 this.datagroups = await EpassReader.scanNfc(scanOptions);
 console.log("NFC Data groups:", this.datagroups);
@@ -73,15 +114,37 @@ The NFC will return the following interface:
 ```javascript
 interface INfcResult {
     error: string;
-    DG1: number[];
-    DG2: number[];
-    SOD: number[];
+    DG1: IDataGroup;
+    DG2: IDataGroup;
+    DG3: IDataGroup;
+    DG4: IDataGroup;
+    DG5: IDataGroup;
+    DG6: IDataGroup;
+    DG7: IDataGroup;
+    DG8: IDataGroup;
+    DG9: IDataGroup;
+    DG10: IDataGroup;
+    DG11: IDataGroup;
+    DG12: IDataGroup;
+    DG13: IDataGroup;
+    DG14: IDataGroup;
+    DG15: IDataGroup;
+    DG16: IDataGroup;
+    SOD: IDataGroup;
+    COM: IDataGroup;
     success: boolean;
 }
 ```
+Passport / ID-card
+DG1: Basic information
+DG2: Document photo
 
-As of the example above, three values are required as of a list of datagroups. DG1 contains the complete MRZ which can be extracted to firstname, lastname, birthdate, gender etc. DG2 contains the document photo. The datagroups exist of a number array. There are helper functions inside the SDK to convert these number arrays to readable values which will be discussed later.
-
+Driving license:
+DG1: Basic information + vehicle categories
+DG5: Signature
+DG6: Document photo
+DG11: Extended information (BSN)
+DG12: MRZ code (except first and last digit)
 
 ### Reading progress and errors of the NFC
 Ofcourse the NFC reading takes some time depending on the speed of the device as of the speed of the NFC chip of the document. Implementation may differ, below an example with references to use on different places
@@ -92,7 +155,7 @@ import { EpassReader, JP2Decoder } from "@proofme-id/sdk/web/reader";
 import { EDataGroup } from "@proofme-id/sdk/web/reader/enums";
 import { ReaderHelper } from "@proofme-id/sdk/web/reader/helpers";
 import {
-    IMrzCredentials,
+    IDocumentCredentials,
     INfcResult,
     IPassportNfcProgressErrorEvent,
     IPassportNfcProgressEvent,
@@ -111,7 +174,7 @@ export class AppComponent {
      * Gets called once whenever the NFC reading starts
      */
     onPassportReadStart(): void {
-        this.nfcProgressValue = 0;
+        this.progress = 0;
         console.log("onPassportReadStart");
     }
 
@@ -120,11 +183,10 @@ export class AppComponent {
      * @param event 
      */
     onPassportNfcProgress(event: IPassportNfcProgressEvent): void {
-        const nfcStep = event.step;
-        const nfcTotalSteps = 7;
+        const currentStep = event.currentStep;
+        const totalSteps = event.totalSteps;
         this.ngZone.run(() => {
-            this.nfcProgressValue = parseInt(((nfcStep / nfcTotalSteps) * 100).toFixed(0));
-            console.log(`NFC Progress ${this.nfcProgressValue}%`);
+            this.progress = parseInt(((currentStep / totalSteps) * 100).toFixed(0));
         });
     }
 
@@ -134,12 +196,25 @@ export class AppComponent {
      */
     onPassportReadError(event: IPassportNfcProgressErrorEvent): void {
         console.error("onPassportReadError event:", event);
-
-        if (event.error === "ConnectionLost") {
-            console.error("Connection lost");
-        } else if (event.exception?.includes("onPACEException") && event.message?.includes("SW = 0x6300: Unknown")) {
-            console.error("Incorrect MRZ credentials for NFC chip");
+        // When the MRZ is faulty
+        let swHex = null;
+        if (event.sw) {
+            swHex = `0x${parseInt(event.sw, 10).toString(16).toUpperCase()}`
         }
+        if (swHex) {
+            // RAPDU = 6982 (SW = 0x6982: SECURITY STATUS NOT SATISFIED) = 27010
+            // RAPDU = 6A86 (SW = 0x6A86: INCORRECT P1P2) = 27270
+            if (swHex === "0x6982" || swHex === "0x6A86") {
+                console.error("Incorrect MRZ credentials for NFC chip");
+                this.showToast("Incorrect MRZ credentials for NFC chip");
+            } else {
+                this.showToast("Connection lost");
+            }
+        } else {
+            this.showToast("Connection lost");
+        }
+        this.nfcEnabled = false;
+        EpassReader.stopNfc();
     }
 
     /**
@@ -234,8 +309,8 @@ Below an example of how to start this functionality. The argument is optional an
 ```javascript
 const documentInfo = await EpassReader.scanDocument({
     translations: {
-        frontScan: "Scan front",
-        backScan: "Scan back",
+        firstResultScan: "Scan front",
+        secondResultScan: "Scan back",
         processing: "Processing...",
         rotate: "Please rotate the document"
     }
@@ -247,7 +322,7 @@ This function will return the following interface
 interface IScanDocumentResult {
     frontPhoto: string;
     backPhoto?: string;
-    mrz?: IMrzCredentials;
+    mrz?: IDocumentCredentials;
     face?: string;
     errors?: string[];
 }
@@ -290,10 +365,23 @@ The following options are available for the document scan:
 interface IScanDocumentOptions {
     autoCloseDuration?: number
     translations?: {
-        frontScan?: string;
+        firstResultScan?: string;
         processing?: string;
         rotate?: string;
-        backScan?: string;
+        secondResultScan?: string;
+    },
+    config?: {
+        mrz: {
+            detect: true,
+            required: true,
+            srcImage: true
+        },
+        face: {
+            detect: true,
+            required: true,
+            srcImage: true
+        },
+        maxRetries: 0
     }
 }
 ```
@@ -312,18 +400,35 @@ How long the rotation screen should show in miliseconds.
 
 ___
 
-#### translations
+### translations
 _object_ `OPTIONAL`
 
 Four translation texts are available. If one or none are defined, that text will not be shown in that step
 
-<b>frontScan:</b> The text on the first screen: Scan front of document
+<b>firstResultScan:</b> The text on the first screen: Scan front of document
 
 <b>processing:</b> The text on the 'loading' screen: When processing MRZ / passphoto
 
 <b>rotate:</b> The text that will be shown on the rotate screen if not passport: Rotate document
 
-<b>backScan:</b> The text that will be shown on the last step if not passport: Scan back of document
+<b>secondResultScan:</b> The text that will be shown on the last step if not passport: Scan back of document
 
+### config
+_object_ `OPTIONAL`
 
+Two processors are available; mrz & face. Each processor has three options; detect, required & srcImage. Either mrz or face should have detect enabled
+
+##### mrz & face
+_object_ `OPTIONAL`
+
+<b>detect:</b> Should this processor be enabled to return results
+
+<b>required:</b> Is the result for this processor necessary
+
+<b>srcImage:</b> Should this processor return the source image (picture made by camera)
+
+___
+##### maxRetries
+_int_ `OPTIONAL`
+<b>srcImage:</b> The maximum amount of tries for each result if required.
 ___
