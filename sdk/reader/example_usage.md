@@ -41,7 +41,7 @@ async mrz(): Promise<void> {
 
 The MRZ credentials will return the following interface:
 ```javascript
-interface IMrzCredentials {
+interface IDocumentCredentials {
     documentNumber: string;
     birthDateDigits: string;
     birthDate?: Date;
@@ -155,7 +155,7 @@ import { EpassReader, JP2Decoder } from "@proofme-id/sdk/web/reader";
 import { EDataGroup } from "@proofme-id/sdk/web/reader/enums";
 import { ReaderHelper } from "@proofme-id/sdk/web/reader/helpers";
 import {
-    IMrzCredentials,
+    IDocumentCredentials,
     INfcResult,
     IPassportNfcProgressErrorEvent,
     IPassportNfcProgressEvent,
@@ -322,7 +322,7 @@ This function will return the following interface
 interface IScanDocumentResult {
     frontPhoto: string;
     backPhoto?: string;
-    mrz?: IMrzCredentials;
+    mrz?: IDocumentCredentials;
     face?: string;
     errors?: string[];
 }
