@@ -163,7 +163,6 @@ import {
 } from "@proofme-id/sdk/web/reader/interfaces";
 
 export class AppComponent {
-    iosMrzInvalidReference = this.iosMrzInvalidError.bind(this);
     onPassportReadStartReference = this.onPassportReadStart.bind(this);
     onPassportReadErrorReference = this.onPassportReadError.bind(this);
     onPassportReadNfcProgressReference = this.onPassportNfcProgress.bind(this);
@@ -217,25 +216,15 @@ export class AppComponent {
         EpassReader.stopNfc();
     }
 
-    /**
-     * Gets called whenever the MRZ is invalid for specifically ios (android mrz error is handled inside onPassportReadError)
-     */
-    async iosMrzInvalidError(): Promise<void> {
-        this.nfcEnabled = false;
-        await EpassReader.stopNfc();
-    }
-
     ...
 
     addNfcListeners(): void {
-        window.addEventListener("iosMrzInvalid", this.iosMrzInvalidReference);
         window.addEventListener("onPassportReadStart", this.onPassportReadStartReference);
         window.addEventListener("onPassportReadError", this.onPassportReadErrorReference);
         window.addEventListener("onPassportNfcProgress", this.onPassportReadNfcProgressReference);
     }
 
     removeNfcListeners(): void {
-        window.removeEventListener("iosMrzInvalid", this.iosMrzInvalidReference);
         window.removeEventListener("onPassportReadStart", this.onPassportReadStartReference);
         window.removeEventListener("onPassportReadError", this.onPassportReadErrorReference);
         window.removeEventListener("onPassportNfcProgress", this.onPassportReadNfcProgressReference);
