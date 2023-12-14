@@ -49,7 +49,7 @@ interface IDocumentCredentials {
     issueDate?: string;
     expiryDate?: Date;
     gender?: string;
-    documentType: string;
+    documentType: EDocumentType;
     firstNames?: string;
     lastName?: string;
     issuer?: string;
@@ -63,6 +63,11 @@ interface IDocumentCredentials {
     documentNumberCheckDigitCorrect?: boolean;
     expiryDateCheckDigitCorrect?: boolean;
     birthDateCheckDigitCorrect?: boolean;
+}
+enum EDocumentType {
+    PASSPORT = "P",
+    ID_CARD = "I",
+    DRIVER_LICENSE = "D"
 }
 ```
 
@@ -182,11 +187,7 @@ export class AppComponent {
      * @param event 
      */
     onPassportNfcProgress(event: IPassportNfcProgressEvent): void {
-        const currentStep = event.currentStep;
-        const totalSteps = event.totalSteps;
-        this.ngZone.run(() => {
-            this.progress = parseInt(((currentStep / totalSteps) * 100).toFixed(0));
-        });
+        this.progress = event.progress
     }
 
     /**
