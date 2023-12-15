@@ -77,6 +77,7 @@ Now double click on the file, on the right the `File inspector` opens. Click on 
 "nfc_unknown_error" = "Scanning failed";
 "nfc_general_error" = "Something went wrong";
 "nfc_success" = "Success!";
+"nfc_reconnecting" = "Connection lost. Searching for card... 🔎";
 ```
 
 #### Dutch translations
@@ -92,5 +93,6 @@ Now double click on the file, on the right the `File inspector` opens. Click on 
 "nfc_unknown_error" = "Scannen mislukt";
 "nfc_general_error" = "Er is iets fout gegaan";
 "nfc_success" = "Gelukt!";
+"nfc_reconnecting" = "Verbinding verloren. Zoeken naar kaart... 🔎";
 ```
 
