@@ -234,6 +234,16 @@ export class AppComponent {
     ...
 ```
 
+### Error codes by scanNfc
+#### USER_CANCELED
+The user canceled the NFC popover
+
+#### SYSTEM_RESOURCE_UNAVAILABLE
+The device has an open session of the NFC or is overheated
+
+#### SESSION_TIMEOUT
+The device has 60 seconds total to complete the NFC scan or either 20 seconds in one session without a retry (because of disconnect of the chip). If either one of these exceed, the timeout will kick in
+
 ### Helper functions to convert DG1 and DG2 to readable values
 So whenever we are done reading the NFC we receive the datagroups in a number list format. For converting it to a readable format:
 
