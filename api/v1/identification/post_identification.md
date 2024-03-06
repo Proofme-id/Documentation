@@ -72,7 +72,7 @@ ___
 ## Response
 
 `201` application/json  
-An identification object is returned, as described in [Get identification](api/v1/identification/get_identification.md).
+An identification object is returned, as described in [Get identification](/api/v1/identification/get_identification.md).
 
 # Request
 
