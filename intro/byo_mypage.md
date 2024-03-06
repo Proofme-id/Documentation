@@ -19,7 +19,7 @@ A default identification exist out of 3 stages:
   * Decrypt data (optional)
 
 ### Prerequisites
-* An account at [Proofme](dashboard.proofme.id)
+* An account at [Proofme](https://dashboard.proofme.id)
 * An api key
   * A PGP-key for decryption (optional)
 * A configured Proofme (Identification request template)
