@@ -51,7 +51,7 @@ During the Identification stage, a QR-code is generated for the visitor to scan 
         alert("Invalid identificationId");
     }
 
-    let socket = new WebSocket(`wss://api.proofme.id/?channel=undefined&data=id:${identification}`);
+    let socket = new WebSocket(`wss://api.proofme.id?data=id:${identification}`);
 
     socket.onopen = function(e) {
         console.log("Connection is open");
