@@ -27,9 +27,13 @@ Markdown organised by `_sidebar.md`:
   `api/v1/{identification,document}/…`.
 - `did/`, `encryption/`, `components/`, `diagrams/`, `examples.md`.
 - `index.html` (docsify config — `$docsify` options, and the `<script>`/`<link>` tags that
-  pull docsify core + plugins from `cdn.jsdelivr.net`/`unpkg.com` CDNs at runtime), `_sidebar.md`
-  (nav), `_coverpage.md`, `styles.css`, `media/` (images, `favicon.ico`, `version.json`),
-  `plugins/`.
+  pull docsify core + most plugins from `cdn.jsdelivr.net`/`unpkg.com` CDNs at runtime),
+  `_sidebar.md` (nav), `_coverpage.md`, `styles.css`, `media/` (images, `favicon.ico`,
+  `version.json`), `plugins/` (markdown content *about* Proofme's own webrtc plugins — not
+  docsify plugin code, despite the name).
+- `vendor/` — a **vendored, patched** copy of the `websequencediagrams-docsify` plugin,
+  served locally instead of loaded from unpkg. See "Deployment" and the file's own header
+  comment for why.
 - `Dockerfile`, `nginx.conf`, `security-headers.conf` — production deployment (see below).
 - `test.html` — a stray IDE live-template file (`$Title$`/`$END$` placeholders), not real
   content; harmless, excluded from the production image, not otherwise touched.
@@ -105,20 +109,46 @@ What *was* verified without a browser, before shipping this bump: the CSS theme 
 against the actual CDN URLs); the compiled v5 bundle still contains an `.origin` fallback
 assignment on its renderer object, matching the pattern this site's custom
 `markdown.renderer.code` override in `index.html` depends on
-(`this.origin.code.apply(this, arguments)`, used for the drawio code-block handling). Neither
-of these fully substitutes for an actual render, though. **If this page looks broken after
-deploy** (missing sidebar/menu, broken tabs, drawio diagrams not rendering, search not
-working, emoji/time-updater not showing), the docsify version bump is the first thing to
-suspect — check the browser console, and consider reverting `index.html`'s two `@5` refs
-back to `@4` (git history has the prior working state) while investigating further, rather
-than trying to patch forward.
+(`this.origin.code.apply(this, arguments)`, used for the drawio code-block handling).
+
+**Confirmed outcome (from an actual post-deploy browser check):** `docsify-tabs` works
+correctly under v5. Two real issues surfaced, both fixed:
+
+1. **`$docsify.themeColor` is deprecated in v5** (console warning, not an error) — replaced
+   with the v5-supported `--theme-color` CSS custom property, set in a small inline
+   `<style>` block in `index.html`'s `<head>`. No visual change intended.
+2. **`websequencediagrams-docsify@2.0.1` broke outright**: `TypeError: Cannot read
+   properties of null (reading 'textContent')`. Root-caused by diffing the compiled
+   docsify@4 vs docsify@5 CDN bundles: v4 rendered a fenced code block's `<code>` element as
+   `class="lang-websequencediagrams"` (one class); v5 renders it as
+   `class="lang-websequencediagrams language-websequencediagrams"` (two classes, presumably
+   for Prism/highlight.js ecosystem compatibility). The plugin looked up that element with
+   an **exact-match** attribute selector (`code[class=lang-websequencediagrams]`), which
+   only matches when the class attribute is *precisely* that string — so it silently
+   returned `null` under v5's two-class output, for every sequence-diagram code block across
+   the site (`examples.md`, `intro/identifications.md`, `diagrams/*.md`,
+   `components/signalling.md`). Fixed by **vendoring a patched copy** at
+   `vendor/docsify-websequencediagrams.js` (loaded from `/vendor/...` instead of unpkg) —
+   the only change from upstream 2.0.1 is that one selector, changed to the class selector
+   `code.lang-websequencediagrams`, which matches regardless of any additional classes and
+   so is correct under both v4's and v5's output. The plugin has had no release since 2.0.1
+   and is effectively unmaintained, hence vendoring a fix rather than waiting for/expecting
+   an upstream update.
+
+If another docsify-plugin error shows up in the console after a future change here, the
+same pattern (v5 changed some generated-HTML detail; an old, unmaintained CDN plugin's
+selector/assumption was too strict for it) is the first thing to check — inspect the actual
+compiled bundle output (`curl` the CDN URL, `grep` for the relevant template string) rather
+than guessing, the way the `websequencediagrams-docsify` fix above was diagnosed.
 
 ## External dependencies
 
 Documents (but does not run) `IPSP-Api`, the `sdk`, and the identity flows. Content should
-track those repos' actual behaviour. At runtime, the page itself loads docsify core and
+track those repos' actual behaviour. At runtime, the page itself loads docsify core and most
 plugins from `cdn.jsdelivr.net`/`unpkg.com` — the site won't render correctly without
-outbound access to those CDNs from the visitor's browser (not from the server).
+outbound access to those CDNs from the visitor's browser (not from the server). One plugin
+(`websequencediagrams-docsify`) is the exception — vendored locally at `vendor/`, see
+"Deployment", so it doesn't depend on unpkg being reachable or unchanged.
 
 ## Development commands
 

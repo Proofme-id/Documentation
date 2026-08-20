@@ -9,6 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@5/lib/themes/vue.css">
         <link rel="stylesheet" href="styles.css">
+        <!-- $docsify.themeColor is deprecated as of docsify v5; the CSS custom property is
+             the v5-supported replacement. -->
+        <style>
+            :root {
+                --theme-color: #1B89C4;
+            }
+        </style>
     </head>
     <body>
         <div id="app"></div>
@@ -19,7 +26,6 @@
                 coverpage: false,
                 loadSidebar: true,
                 search: 'auto',
-                themeColor: '#1B89C4',
                 timeUpdater: {
                     text: "---\nlast update: {docsify-updated}",
                     formatUpdated: "{DD}/{MM}/{YYYY} {HH}:{mm}",
@@ -45,7 +51,9 @@
         </script>
         <!-- Docsify v5 -->
         <script src="//cdn.jsdelivr.net/npm/docsify@5"></script>
-        <script src="//unpkg.com/websequencediagrams-docsify@2.0.1/dist/docsify-websequencediagrams.js"></script>
+        <!-- Vendored, patched copy — see vendor/docsify-websequencediagrams.js's header for
+             why: the unpkg-hosted 2.0.1 build breaks under docsify v5's code-fence output. -->
+        <script src="/vendor/docsify-websequencediagrams.js"></script>
         <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
         <script src="//cdn.jsdelivr.net/npm/docsify-drawio/viewer.min.js"></script>
