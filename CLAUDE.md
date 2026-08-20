@@ -80,7 +80,26 @@ sanity check — not used by the production image) → `docker build .` (build-c
 status. No longer pushes to AWS ECR; the old `clean.yml` (Jenkins feature-branch cleanup) was
 removed. `media/version.json`'s committed placeholder (`{"VERSION":"DEVELOPMENT"}`) is no
 longer overwritten by CI (that was tied to the removed ECR branch-tagging step) — it'll stay
-static unless someone edits it directly.
+static unless someone edits it directly. Uses `actions/checkout@v7`, `actions/setup-node@v7`,
+Node 24 (current Active LTS as of this writing) — kept current, bump again as newer LTS
+releases land.
+
+**`docsify-cli` is pinned to `5.0.0`** (local `npm run start` dev server only — not present
+in the production image, so this version is fully decoupled from what actually renders the
+live site; see "Configuration" below for that). Confirmed working locally
+(`npx docsify-cli --version` → `5.0.0`, `npm run start` serves on `:3000`).
+
+**The live site itself still loads docsify v4 from CDN** (`index.html`'s
+`//cdn.jsdelivr.net/npm/docsify@4` and friends) — deliberately not bumped to v5 despite v5
+existing on npm. docsify v5 was released 2026-07-23 (a few weeks old at time of writing), and
+at least one of the four CDN-loaded plugins this site depends on (`docsify-tabs`) hadn't been
+updated in a year at that point — i.e. predates v5 entirely, with no confirmed compatibility.
+Given this repo has already broken twice in production from docsify-config issues that only
+surfaced in a real browser (see git history — deleted `README.md`; an over-strict CSP), and
+there's no browser-testing tool available to verify a v5 bump before deploying, this was
+treated as a real risk to flag rather than something to bump silently. If revisiting: check
+each plugin's own repo for v5 compatibility first, then test in an actual browser (all pages,
+all plugins — tabs, drawio/MathJax, search, emoji, time-updater) before deploying.
 
 ## External dependencies
 
