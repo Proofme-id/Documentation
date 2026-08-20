@@ -89,17 +89,29 @@ in the production image, so this version is fully decoupled from what actually r
 live site; see "Configuration" below for that). Confirmed working locally
 (`npx docsify-cli --version` → `5.0.0`, `npm run start` serves on `:3000`).
 
-**The live site itself still loads docsify v4 from CDN** (`index.html`'s
-`//cdn.jsdelivr.net/npm/docsify@4` and friends) — deliberately not bumped to v5 despite v5
-existing on npm. docsify v5 was released 2026-07-23 (a few weeks old at time of writing), and
-at least one of the four CDN-loaded plugins this site depends on (`docsify-tabs`) hadn't been
-updated in a year at that point — i.e. predates v5 entirely, with no confirmed compatibility.
-Given this repo has already broken twice in production from docsify-config issues that only
-surfaced in a real browser (see git history — deleted `README.md`; an over-strict CSP), and
-there's no browser-testing tool available to verify a v5 bump before deploying, this was
-treated as a real risk to flag rather than something to bump silently. If revisiting: check
-each plugin's own repo for v5 compatibility first, then test in an actual browser (all pages,
-all plugins — tabs, drawio/MathJax, search, emoji, time-updater) before deploying.
+**The live site itself loads docsify v5 from CDN** (`index.html`'s
+`//cdn.jsdelivr.net/npm/docsify@5` + matching `lib/themes/vue.css`) — bumped from v4
+deliberately, as an explicit, flagged decision (not a silent bump), because of a real risk:
+docsify v5 was released 2026-07-23 (a few weeks old at the time), and at least one of the
+four CDN-loaded plugins this site depends on (`docsify-tabs`) hadn't been updated in a year
+at that point — i.e. predates v5 entirely, with no *confirmed* compatibility from its own
+maintainer. This repo had already broken twice in production from docsify-config issues that
+only surfaced in a real browser (see git history — deleted `README.md`; an over-strict CSP),
+and there's no browser-testing tool available here to fully verify a v5 bump before deploying.
+
+What *was* verified without a browser, before shipping this bump: the CSS theme path
+(`lib/themes/vue.css`), core script path, and the unpinned emoji plugin path
+(`lib/plugins/emoji.min.js`) all still resolve at v5 (same layout as v4, checked via `curl`
+against the actual CDN URLs); the compiled v5 bundle still contains an `.origin` fallback
+assignment on its renderer object, matching the pattern this site's custom
+`markdown.renderer.code` override in `index.html` depends on
+(`this.origin.code.apply(this, arguments)`, used for the drawio code-block handling). Neither
+of these fully substitutes for an actual render, though. **If this page looks broken after
+deploy** (missing sidebar/menu, broken tabs, drawio diagrams not rendering, search not
+working, emoji/time-updater not showing), the docsify version bump is the first thing to
+suspect — check the browser console, and consider reverting `index.html`'s two `@5` refs
+back to `@4` (git history has the prior working state) while investigating further, rather
+than trying to patch forward.
 
 ## External dependencies
 
