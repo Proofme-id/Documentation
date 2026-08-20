@@ -25,6 +25,14 @@
                 auto2top: true,
                 coverpage: false,
                 loadSidebar: true,
+                // Only /_sidebar.md exists (a single, site-wide nav) — without this, docsify
+                // tries a per-directory _sidebar.md first on every nested page (e.g.
+                // /api/v1/document/_sidebar.md) and 404s before falling back to the root
+                // one. This alias redirects every such lookup straight to the root file, so
+                // the 404 never happens instead of happening-then-being-recovered-from.
+                alias: {
+                    '/.*/_sidebar\\.md': '/_sidebar.md'
+                },
                 search: 'auto',
                 timeUpdater: {
                     text: "---\nlast update: {docsify-updated}",
@@ -54,7 +62,9 @@
         <!-- Vendored, patched copy — see vendor/docsify-websequencediagrams.js's header for
              why: the unpkg-hosted 2.0.1 build breaks under docsify v5's code-fence output. -->
         <script src="/vendor/docsify-websequencediagrams.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+        <!-- Emoji support has been built into docsify core since v4.13 — the separate
+             plugin script is deprecated (and its own console warning confirms it), so it's
+             not loaded here. -->
         <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
         <script src="//cdn.jsdelivr.net/npm/docsify-drawio/viewer.min.js"></script>
         <script src='//cdn.jsdelivr.net/npm/docsify-drawio/drawio.js'></script>

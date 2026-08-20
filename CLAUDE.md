@@ -135,6 +135,25 @@ correctly under v5. Two real issues surfaced, both fixed:
    and is effectively unmaintained, hence vendoring a fix rather than waiting for/expecting
    an upstream update.
 
+A second round of console findings after that fix (both harmless, both cleaned up):
+
+3. **"Docsify emoji plugin has been deprecated as of v4.13"** — emoji rendering has been
+   built into docsify core since that release (confirmed present in the v5 bundle's compiled
+   output). The separate `//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js` script tag
+   was removed from `index.html`; nothing else changed, emoji rendering still works via core.
+4. **`GET /<nested-path>/_sidebar.md` 404s on every non-root page** — expected docsify
+   behaviour, not a bug: with `loadSidebar: true` and no per-directory `_sidebar.md` files
+   (this site only has the one at the root), docsify tries a directory-relative sidebar
+   first on every nested page and falls back to the root one after that request 404s.
+   Functionally harmless (the correct sidebar always ends up showing) but noisy. Suppressed
+   with an `alias` config
+   (`alias: { '/.*/_sidebar\\.md': '/_sidebar.md' }`) that redirects
+   any nested sidebar lookup straight to the root file before a request is even made — the
+   `alias` config option was confirmed still supported in v5 by inspecting the compiled
+   bundle (`t.alias?this.#n(e,t.alias):e` in the path-resolution code) before relying on it.
+   If a per-directory sidebar is ever genuinely wanted for some section, this alias would
+   need to be scoped (e.g. to a regex excluding that section) or removed.
+
 If another docsify-plugin error shows up in the console after a future change here, the
 same pattern (v5 changed some generated-HTML detail; an old, unmaintained CDN plugin's
 selector/assumption was too strict for it) is the first thing to check — inspect the actual
