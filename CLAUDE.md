@@ -43,9 +43,18 @@ port **80**, domain `docs.test.proofme.nl`.
 Since there's no `dist/` build output to copy from, the `Dockerfile` copies the **whole repo**
 into the nginx image and then explicitly removes the files that aren't documentation content
 (`.git`, `.github`, `Dockerfile`, `nginx.conf`, `security-headers.conf`, `package.json`/
-`package-lock.json`, `CLAUDE.md`, `README.md`, `test.html`) — there's no separate build
-output to be selective about instead. If you add a new *tooling* file to the repo root (not
-a docs content folder), add it to that `rm -rf` list too, or it'll be served publicly.
+`package-lock.json`, `CLAUDE.md`, `test.html`) — there's no separate build output to be
+selective about instead. If you add a new *tooling* file to the repo root (not a docs content
+folder), add it to that `rm -rf` list too, or it'll be served publicly.
+
+**`README.md` is deliberately NOT in that cleanup list**, even though it looks like a
+repo-tooling file — it isn't excluded. `index.html`'s `$docsify` config has no `homepage:`
+override, so docsify defaults to fetching `/README.md` as the actual homepage content for the
+`/` route. This was caught live: an earlier version of this Dockerfile deleted `README.md`,
+which made the homepage (and, cascading from it, effectively the whole page) show docsify's
+generic "404 - Not found" instead of real content, after an actual Coolify deploy — not
+something `curl`/local `docker run` testing caught, since curl only confirms *a* 200 response
+for `/`, not that docsify's client-side JS successfully fetched what it needed.
 
 `nginx.conf`: docsify here uses **hash-based routing** (`#/page`, no `routerMode: 'history'`
 in `index.html`) — every real HTTP request already maps to an actual file docsify fetches by
@@ -55,12 +64,16 @@ relative path (e.g. `#/intro/identifications` → `GET /intro/identifications.md
 `.md`/`.css`/`.js`/other assets get a short (10 min) cache — content here isn't filename-hashed
 the way a compiled JS bundle is, so long/aggressive caching would hide edits.
 
-`security-headers.conf`'s CSP is scoped to the actual CDN origins `index.html` loads from
-(`cdn.jsdelivr.net`, `unpkg.com`) — **verify in an actual browser console** after changing
-`index.html`'s script/link tags or adding a docsify plugin from a new CDN; a CSP mismatch
-fails silently (blank page / broken plugin), not as a build or curl-visible error. This
-wasn't fully verified in a real browser during this setup, only via `curl` (headers, status
-codes, served content) — do a quick visual check after the first Coolify deploy.
+**`security-headers.conf` intentionally has no Content-Security-Policy.** A CSP scoped to the
+CDN origins visible in `index.html` (`cdn.jsdelivr.net`, `unpkg.com`) was tried and broke the
+live site twice after real Coolify deploys — `docsify-drawio`'s viewer loads MathJax from
+`app.diagrams.net` and (from that same plugin) a Google Fonts stylesheet from
+`fonts.googleapis.com`, neither visible from a static read of `index.html` since they're
+fetched dynamically by the plugin's own JS, not declared as `<script>`/`<link>` tags. A CSP
+fails *silently* (blank content, broken plugin, no build/deploy-time error) — see
+`security-headers.conf`'s comment for the full reasoning before re-adding one. The other
+three headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`) stayed; they
+can't break page functionality the way a CSP can.
 
 `.github/workflows/build.yml` is CI-only: `npm ci` (installs `docsify-cli`, mainly as a
 sanity check — not used by the production image) → `docker build .` (build-check) → Slack
@@ -106,12 +119,16 @@ variables / runtime config — everything here is static content, unlike the pla
   server, not hardened/optimized for serving traffic (see "Deployment"); production is
   nginx, no Node.js runtime in the image at all.
 - Any new repo-root **tooling** file (not a docs content folder) needs adding to the
-  `Dockerfile`'s `rm -rf` cleanup list, or it gets served publicly at the site root
-  (verified during this setup: without that list, `package.json`, `README.md`, etc. would
-  otherwise be reachable — there's no separate build output to be selective about instead).
-- A CSP or cache-header change in `nginx.conf`/`security-headers.conf` can silently break
-  docsify (blank page, plugin not loading) without any build/deploy-time error — spot-check
-  in an actual browser, not just `curl`.
+  `Dockerfile`'s `rm -rf` cleanup list, or it gets served publicly at the site root — except
+  `README.md`, which must stay (see "Deployment": it's docsify's actual homepage content,
+  not a tooling file, even though it looks like one).
+- Don't add a `Content-Security-Policy` back to `security-headers.conf` without testing
+  every plugin (drawio, tabs, search, emoji) in a real browser console first — see that
+  file's comment; it broke the live site twice already for exactly this reason.
+- A cache-header or nginx routing change can still silently break docsify (blank page,
+  stale content, missing homepage) without any build/deploy-time error — `curl` only proves
+  *a* response came back, not that docsify's client-side JS got what it needed. Spot-check
+  in an actual browser after any `Dockerfile`/`nginx.conf` change.
 
 ## Instructions for Claude
 
@@ -121,5 +138,7 @@ Production deployment is Docker (nginx, no build step) + Coolify — GitHub Acti
 validation only (`docker build .`) and must not become a deployment pipeline again (no
 registry push, no re-adding the old Jenkins clean-up job). If you touch `Dockerfile`/
 `nginx.conf`/`security-headers.conf`/`index.html`'s script tags, rebuild and run the image
-locally, and check a real browser's console for CSP/script-loading errors before considering
-the change done — `curl` alone won't catch a broken docsify page.
+locally, then check a **real browser's console** (not just `curl`) before considering the
+change done — this repo has already broken twice in ways `curl`/local `docker run` testing
+did not catch (a deleted `README.md` breaking the homepage; a CSP blocking a plugin's
+dynamically-loaded resources), both only visible with actual browser dev tools.

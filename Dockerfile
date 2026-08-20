@@ -12,8 +12,15 @@ RUN rm -rf ./*
 COPY . .
 # Strip repo/tooling files that aren't documentation content — there's no separate
 # dist/ output to copy from instead, so these have to be removed explicitly.
+#
+# README.md is NOT in this list, even though it looks like a repo-tooling file: docsify has
+# no `homepage:` override in index.html's $docsify config, so it defaults to fetching
+# /README.md as the actual homepage content for the "/" route. Deleting it breaks the
+# homepage (docsify shows its generic "404 - Not found" page, sidebar included, since the
+# page it needed couldn't be fetched) — this was caught and fixed after a real Coolify
+# deploy showed exactly that.
 RUN rm -rf .git .github .gitignore .dockerignore Dockerfile nginx.conf security-headers.conf \
-    package.json package-lock.json CLAUDE.md README.md test.html
+    package.json package-lock.json CLAUDE.md test.html
 
 EXPOSE 80
 
