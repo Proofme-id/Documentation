@@ -80,13 +80,28 @@ three headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`) s
 can't break page functionality the way a CSP can.
 
 `.github/workflows/build.yml` is CI-only: `npm ci` (installs `docsify-cli`, mainly as a
-sanity check — not used by the production image) → `docker build .` (build-check) → Slack
-status. No longer pushes to AWS ECR; the old `clean.yml` (Jenkins feature-branch cleanup) was
-removed. `media/version.json`'s committed placeholder (`{"VERSION":"DEVELOPMENT"}`) is no
-longer overwritten by CI (that was tied to the removed ECR branch-tagging step) — it'll stay
-static unless someone edits it directly. Uses `actions/checkout@v7`, `actions/setup-node@v7`,
-Node 24 (current Active LTS as of this writing) — kept current, bump again as newer LTS
-releases land.
+sanity check — not used by the production image) → `npm audit --audit-level=high` → **Hadolint**
+(Dockerfile lint) → `docker build .` (build-check) → **Trivy** (image vulnerability scan,
+blocking on CRITICAL/HIGH) → Slack status. No longer pushes to AWS ECR; the old `clean.yml`
+(Jenkins feature-branch cleanup) was removed. `media/version.json`'s committed placeholder
+(`{"VERSION":"DEVELOPMENT"}`) is no longer overwritten by CI (that was tied to the removed
+ECR branch-tagging step) — it'll stay static unless someone edits it directly. Uses
+`actions/checkout@v7`, `actions/setup-node@v7`, Node 24 (current Active LTS as of this
+writing) — kept current, bump again as newer LTS releases land.
+
+**Security scanning was added later** — this repo's only prior CI check was that the image
+builds. `npm audit` covers `docsify-cli`'s own dependency tree (6 findings existed at the
+time this was added — `picomatch`/`semver`/`send`/`ws` — all fixed via a plain, non-breaking
+`npm audit fix`; none of this tree ships in the production image anyway, it's dev-tooling
+only, but auditing it is essentially free). Both the base image (`nginx:alpine`) and the
+final built image were confirmed **fully clean** under Trivy before wiring it in as a
+blocking gate (`exit-code: 1` on CRITICAL/HIGH) — not added optimistically.
+`aquasecurity/trivy-action` is pinned to **`v0.36.0`** deliberately: this action (and Trivy
+itself) suffered a real supply-chain compromise disclosed 2026-03-19 that injected a
+credential stealer into every tag from `0.0.1` through `0.34.2`. Never relax this to
+`@master`/`@latest` or move it below `v0.35.0` without checking the project's own security
+advisories first — see `coturn`'s `CLAUDE.md`, which has the same note (added at the same
+time, for the same reason).
 
 **`docsify-cli` is pinned to `5.0.0`** (local `npm run start` dev server only — not present
 in the production image, so this version is fully decoupled from what actually renders the
@@ -175,7 +190,8 @@ outbound access to those CDNs from the visitor's browser (not from the server). 
   serve`).
 - Production image, local check: `docker build -t proofme-docs .` then `docker run --rm -p
   8080:80 proofme-docs`.
-- No lint/test — it's static Markdown; CI's only real check is that the Docker image builds.
+- No lint/test — it's static Markdown; CI's real checks are that the Docker image builds
+  plus `npm audit`/Hadolint/Trivy (see "Deployment" above).
 
 ## Configuration
 
